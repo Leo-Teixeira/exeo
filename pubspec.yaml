@@ -1,0 +1,68 @@
+name: exeo
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  flutter_riverpod: ^2.2.0
+  riverpod: ^2.2.0
+
+  fluttericon: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/pictures/
+
+  fonts:
+    # Rubik Font
+    - family: RubikLight
+      fonts: 
+        - asset: assets/font/Rubik-Light.ttf
+    
+    - family: RubikRegular
+      fonts: 
+        - asset: assets/font/Rubik-Regular.ttf
+
+    - family: RubikMedium
+      fonts: 
+        - asset: assets/font/Rubik-Medium.ttf
+    
+    - family: RubikBold
+      fonts: 
+        - asset: assets/font/Rubik-Bold.ttf
+
+    # Hind Mudarai Font
+    - family: HindMaduraiLight
+      fonts: 
+        - asset: assets/font/HindMadurai-Light.ttf
+    
+    - family: HindMaduraiRegular
+      fonts: 
+        - asset: assets/font/HindMadurai-Regular.ttf
+
+    - family: HindMaduraiMedium
+      fonts: 
+        - asset: assets/font/HindMadurai-Medium.ttf
+    
+    - family: HindMaduraiBold
+      fonts: 
+        - asset: assets/font/HindMadurai-Bold.ttf
