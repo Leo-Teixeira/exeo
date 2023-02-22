@@ -26,147 +26,167 @@ class LoginPage extends ConsumerWidget {
                 "Se Connecter",
                 style: TextStyle(fontFamily: fontRubikBold, fontSize: 28),
               ),
-              const Divider(
-                height: 25,
-                color: coulWhite,
+              const SizedBox(
+                height: 20,
               ),
               Form(
                 key: _loginKey,
                 child: AutofillGroup(
                   child: Column(
                     children: [
-                      TextFormField(
-                        // autofillHints: const [AutofillHints.email],
-                        textInputAction: TextInputAction.next,
-                        focusNode: identifiant,
-                        onFieldSubmitted: (term) {
-                          identifiant.unfocus();
-                          FocusScope.of(context).requestFocus(password);
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Le champ ne doit pas être vide';
-                          }
-                          return null;
-                        },
-                        controller: identifiantController,
-                        style: const TextStyle(
-                          fontFamily: fontHindMaduraiMedium,
-                          fontSize: 16,
-                        ),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              width: 1,
-                              color: coulGrey,
-                            ),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          hintText: "PlaceHolder",
-                          hintStyle: const TextStyle(
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: TextFormField(
+                          // autofillHints: const [AutofillHints.email],
+                          textInputAction: TextInputAction.next,
+                          focusNode: identifiant,
+                          onFieldSubmitted: (term) {
+                            identifiant.unfocus();
+                            FocusScope.of(context).requestFocus(password);
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Le champ ne doit pas être vide';
+                            }
+                            return null;
+                          },
+                          controller: identifiantController,
+                          style: const TextStyle(
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              width: 1,
-                              color: coulGrey,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: coulGrey,
+                              ),
+                              // borderRadius: BorderRadius.(),
                             ),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          labelStyle: const TextStyle(
-                            color: coulGrey,
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
-                          labelText: "Votre identifiant",
-                        ),
-                      ),
-                      const Divider(color: coulWhite),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextFormField(
-                            // autofillHints: const [AutofillHints.email],
-                            textInputAction: TextInputAction.next,
-                            focusNode: password,
-                            onFieldSubmitted: (term) {
-                              identifiant.unfocus();
-                              FocusScope.of(context).requestFocus(password);
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Le champ ne doit pas être vide';
-                              }
-                              return null;
-                            },
-                            controller: passwordController,
-                            style: const TextStyle(
+                            hintText: "PlaceHolder",
+                            hintStyle: TextStyle(
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 1,
-                                  color: coulGrey,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              hintText: "PlaceHolder",
-                              hintStyle: const TextStyle(
-                                fontFamily: fontHindMaduraiMedium,
-                                fontSize: 16,
-                              ),
-                              suffixIcon: const Icon(
-                                FontAwesome5.eye,
-                                color: coulBlack,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 1,
-                                  color: coulGrey,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              labelStyle: const TextStyle(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1,
                                 color: coulGrey,
+                              ),
+                              // borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            labelStyle: TextStyle(
+                              color: coulGrey,
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                            ),
+                            labelText: "Votre identifiant",
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                            child: TextFormField(
+                              // autofillHints: const [AutofillHints.email],
+                              textInputAction: TextInputAction.next,
+                              focusNode: password,
+                              onFieldSubmitted: (term) {
+                                identifiant.unfocus();
+                                FocusScope.of(context).requestFocus(password);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Le champ ne doit pas être vide';
+                                }
+                                return null;
+                              },
+                              controller: passwordController,
+                              style: const TextStyle(
                                 fontFamily: fontHindMaduraiMedium,
                                 fontSize: 16,
                               ),
-                              labelText: "Votre mot de passe",
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 1,
+                                    color: coulGrey,
+                                  ),
+                                  // borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                hintText: "PlaceHolder",
+                                hintStyle: TextStyle(
+                                  fontFamily: fontHindMaduraiMedium,
+                                  fontSize: 16,
+                                ),
+                                suffixIcon: Icon(
+                                  FontAwesome5.eye,
+                                  color: coulBlack,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 1,
+                                    color: coulGrey,
+                                  ),
+                                  // borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                labelStyle: TextStyle(
+                                  color: coulGrey,
+                                  fontFamily: fontHindMaduraiMedium,
+                                  fontSize: 16,
+                                ),
+                                labelText: "Votre mot de passe",
+                              ),
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Mot de passe oublié ?",
-                              style: TextStyle(
-                                  fontFamily: fontHindMaduraiRegular,
-                                  fontSize: 12),
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(15, 0, 20, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                "Mot de passe oublié ?",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    fontFamily: fontHindMaduraiRegular,
+                                    fontSize: 12),
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      OutlinedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color?>(coulCiel),
-                          minimumSize: MaterialStateProperty.all<Size?>(
-                            const Size(280.0, 40.0),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color?>(coulCiel),
+                            minimumSize: MaterialStateProperty.all<Size?>(
+                              const Size(500.0, 40.0),
+                            ),
+                            padding:
+                                MaterialStateProperty.all<EdgeInsetsGeometry?>(
+                              const EdgeInsets.fromLTRB(
+                                  2.25, 11.25, 2.25, 11.25),
+                            ),
                           ),
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry?>(
-                            const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
-                          ),
-                        ),
-                        child: const Text(
-                          "Connexion",
-                          style: TextStyle(
-                            color: coulBlack,
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
+                          child: const Text(
+                            "Connexion",
+                            style: TextStyle(
+                              color: coulBlack,
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
@@ -185,6 +205,7 @@ class LoginPage extends ConsumerWidget {
                             child: const Text(
                               "Inscrivez-vous",
                               style: TextStyle(
+                                decoration: TextDecoration.underline,
                                 fontFamily: fontHindMaduraiRegular,
                                 fontSize: 12,
                               ),
