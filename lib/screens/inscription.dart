@@ -23,10 +23,9 @@ class InscriptionPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -39,178 +38,387 @@ class InscriptionPage extends ConsumerWidget {
               ),
               Form(
                 key: _loginKey,
-                child: AutofillGroup(
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: TextFormField(
-                          // autofillHints: const [AutofillHints.email],
-                          textInputAction: TextInputAction.next,
-                          focusNode: lastname,
-                          onFieldSubmitted: (term) {
-                            lastname.unfocus();
-                            FocusScope.of(context).requestFocus(firstname);
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Le champ ne doit pas être vide';
-                            }
-                            return null;
-                          },
-                          controller: lastnameController,
-                          style: const TextStyle(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        focusNode: lastname,
+                        onFieldSubmitted: (term) {
+                          lastname.unfocus();
+                          FocusScope.of(context).requestFocus(firstname);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Le champ ne doit pas être vide';
+                          }
+                          return null;
+                        },
+                        controller: lastnameController,
+                        style: const TextStyle(
+                          fontFamily: fontHindMaduraiMedium,
+                          fontSize: 16,
+                        ),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.(),
+                          ),
+                          hintText: "PlaceHolder",
+                          hintStyle: TextStyle(
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
                           ),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: coulGrey,
-                              ),
-                              // borderRadius: BorderRadius.(),
-                            ),
-                            hintText: "PlaceHolder",
-                            hintStyle: TextStyle(
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: coulGrey,
-                              ),
-                              // borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            labelStyle: TextStyle(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
                               color: coulGrey,
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
                             ),
-                            labelText: "Votre nom",
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          labelStyle: TextStyle(
+                            color: coulGrey,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          labelText: "Votre nom",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        focusNode: firstname,
+                        onFieldSubmitted: (term) {
+                          firstname.unfocus();
+                          FocusScope.of(context).requestFocus(birtdate);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Le champ ne doit pas être vide';
+                          }
+                          return null;
+                        },
+                        controller: firstnameController,
+                        style: const TextStyle(
+                          fontFamily: fontHindMaduraiMedium,
+                          fontSize: 16,
+                        ),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.(),
+                          ),
+                          hintText: "PlaceHolder",
+                          hintStyle: TextStyle(
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          labelStyle: TextStyle(
+                            color: coulGrey,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          labelText: "Votre prénom",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.datetime,
+                        textInputAction: TextInputAction.next,
+                        focusNode: birtdate,
+                        onFieldSubmitted: (term) {
+                          birtdate.unfocus();
+                          FocusScope.of(context).requestFocus(mail);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Le champ ne doit pas être vide';
+                          }
+                          return null;
+                        },
+                        controller: birthdateController,
+                        style: const TextStyle(
+                          fontFamily: fontHindMaduraiMedium,
+                          fontSize: 16,
+                        ),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.(),
+                          ),
+                          hintText: "PlaceHolder",
+                          hintStyle: TextStyle(
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          suffixIcon: Icon(
+                            FontAwesome5.calendar_alt,
+                            color: coulBlack,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          labelStyle: TextStyle(
+                            color: coulGrey,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          labelText: "Votre date de naissance",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        focusNode: mail,
+                        onFieldSubmitted: (term) {
+                          mail.unfocus();
+                          FocusScope.of(context).requestFocus(password);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Le champ ne doit pas être vide';
+                          }
+                          return null;
+                        },
+                        controller: mailController,
+                        style: const TextStyle(
+                          fontFamily: fontHindMaduraiMedium,
+                          fontSize: 16,
+                        ),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.(),
+                          ),
+                          hintText: "PlaceHolder",
+                          hintStyle: TextStyle(
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          labelStyle: TextStyle(
+                            color: coulGrey,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          labelText: "Votre adresse mail",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: TextFormField(
+                        obscureText: true,
+                        textInputAction: TextInputAction.next,
+                        focusNode: password,
+                        onFieldSubmitted: (term) {
+                          password.unfocus();
+                          FocusScope.of(context).requestFocus(confirmPassword);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Le champ ne doit pas être vide';
+                          }
+                          return null;
+                        },
+                        controller: passwordController,
+                        style: const TextStyle(
+                          fontFamily: fontHindMaduraiMedium,
+                          fontSize: 16,
+                        ),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          hintText: "PlaceHolder",
+                          hintStyle: TextStyle(
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          suffixIcon: Icon(
+                            FontAwesome5.eye,
+                            color: coulBlack,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          labelStyle: TextStyle(
+                            color: coulGrey,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          labelText: "Entrer votre mot de passe",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: TextFormField(
+                        obscureText: true,
+                        textInputAction: TextInputAction.next,
+                        focusNode: confirmPassword,
+                        onFieldSubmitted: (term) {
+                          confirmPassword.unfocus();
+                          FocusScope.of(context).requestFocus(lastname);
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Le champ ne doit pas être vide';
+                          }
+                          return null;
+                        },
+                        controller: confirmController,
+                        style: const TextStyle(
+                          fontFamily: fontHindMaduraiMedium,
+                          fontSize: 16,
+                        ),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          hintText: "PlaceHolder",
+                          hintStyle: TextStyle(
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          suffixIcon: Icon(
+                            FontAwesome5.eye,
+                            color: coulBlack,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1,
+                              color: coulGrey,
+                            ),
+                            // borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          labelStyle: TextStyle(
+                            color: coulGrey,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
+                          ),
+                          labelText: "Confirmer votre mot de passe",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: OutlinedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color?>(coulCiel),
+                          minimumSize: MaterialStateProperty.all<Size?>(
+                            const Size(500.0, 40.0),
+                          ),
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry?>(
+                            const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+                          ),
+                        ),
+                        child: const Text(
+                          "Inscription",
+                          style: TextStyle(
+                            color: coulBlack,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16,
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: TextFormField(
-                              // autofillHints: const [AutofillHints.email],
-                              textInputAction: TextInputAction.next,
-                              focusNode: firstname,
-                              onFieldSubmitted: (term) {
-                                firstname.unfocus();
-                                FocusScope.of(context).requestFocus(birtdate);
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Le champ ne doit pas être vide';
-                                }
-                                return null;
-                              },
-                              controller: passwordController,
-                              style: const TextStyle(
-                                fontFamily: fontHindMaduraiMedium,
-                                fontSize: 16,
-                              ),
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1,
-                                    color: coulGrey,
-                                  ),
-                                  // borderRadius: BorderRadius.circular(30.0),
-                                ),
-                                hintText: "PlaceHolder",
-                                hintStyle: TextStyle(
-                                  fontFamily: fontHindMaduraiMedium,
-                                  fontSize: 16,
-                                ),
-                                suffixIcon: Icon(
-                                  FontAwesome5.eye,
-                                  color: coulBlack,
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 1,
-                                    color: coulGrey,
-                                  ),
-                                  // borderRadius: BorderRadius.circular(30.0),
-                                ),
-                                labelStyle: TextStyle(
-                                  color: coulGrey,
-                                  fontFamily: fontHindMaduraiMedium,
-                                  fontSize: 16,
-                                ),
-                                labelText: "Votre prénom",
-                              ),
-                            ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Vous avez déja un compte ?",
+                          style: TextStyle(
+                            fontFamily: fontHindMaduraiRegular,
+                            fontSize: 12,
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: OutlinedButton(
+                        ),
+                        TextButton(
                           onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color?>(coulCiel),
-                            minimumSize: MaterialStateProperty.all<Size?>(
-                              const Size(500.0, 40.0),
-                            ),
-                            padding:
-                                MaterialStateProperty.all<EdgeInsetsGeometry?>(
-                              const EdgeInsets.fromLTRB(
-                                  2.25, 11.25, 2.25, 11.25),
-                            ),
-                          ),
                           child: const Text(
-                            "Connexion",
+                            "Connectez-vous",
                             style: TextStyle(
-                              color: coulBlack,
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Vous avez déja un compte ?",
-                            style: TextStyle(
+                              decoration: TextDecoration.underline,
                               fontFamily: fontHindMaduraiRegular,
                               fontSize: 12,
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Connectez-vous",
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontFamily: fontHindMaduraiRegular,
-                                fontSize: 12,
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                        )
+                      ],
+                    )
+                  ],
                 ),
-              )
+              ),
             ],
           ),
         ),

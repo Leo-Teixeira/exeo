@@ -13,5 +13,5 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
-  runApp(LoginPage());
+  runApp(const LoginWidget());
 }
