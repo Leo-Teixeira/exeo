@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 
 const Color coulCiel = Color(0xFF0FBBE9);
 const Color coulCielFonce = Color(0xFF4C89FF);
@@ -22,3 +23,39 @@ const String fontHindMaduraiLight = 'HindMaduraiLight';
 const String fontHindMaduraiRegular = 'HindMaduraiRegular';
 const String fontHindMaduraiMedium = 'HindMaduraiMedium';
 const String fontHindMaduraiBold = 'HindMaduraiBold';
+
+/*
+* Mise en place de l'appBar
+*/
+
+PreferredSizeWidget? appBarReception(BuildContext context) {
+  return AppBar(
+    backgroundColor: coulWhite,
+    title: const Text(
+      "Exeo",
+      style: TextStyle(color: coulBlack),
+    ),
+    actions: [
+      IconButton(
+        onPressed: () {
+          // Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => const RecentCallWidget()));
+        },
+        icon: const Icon(
+          FontAwesome5.bell,
+          color: coulBlack,
+        ),
+      ),
+      IconButton(
+        onPressed: () {
+          // Navigator.of(context).push(
+          //     MaterialPageRoute(builder: (context) => const SettingsWidget()));
+        },
+        icon: const Icon(
+          FontAwesome5.cog,
+          color: coulBlack,
+        ),
+      ),
+    ],
+  );
+}

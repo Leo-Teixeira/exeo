@@ -1,4 +1,6 @@
+import 'package:exeo/screens/forgot_password.dart';
 import 'package:exeo/screens/inscription.dart';
+import 'package:exeo/services/bottom_appbar.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -160,7 +162,10 @@ class LoginPage extends ConsumerWidget {
                           margin: const EdgeInsets.fromLTRB(15, 0, 20, 0),
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ForgotPasswordPage()));
+                            },
                             child: const Text(
                               "Mot de passe oublié ?",
                               style: TextStyle(
@@ -178,7 +183,11 @@ class LoginPage extends ConsumerWidget {
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => const NavBarPage()));
+                        },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all<Color?>(coulCiel),

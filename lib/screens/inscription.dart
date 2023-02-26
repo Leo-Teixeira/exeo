@@ -1,3 +1,4 @@
+import 'package:exeo/screens/login.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -404,7 +405,11 @@ class InscriptionPage extends ConsumerWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          },
                           child: const Text(
                             "Connectez-vous",
                             style: TextStyle(
