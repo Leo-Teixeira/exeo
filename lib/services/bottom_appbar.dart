@@ -1,4 +1,5 @@
 import 'package:exeo/screens/reception.dart';
+import 'package:exeo/screens/search.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
     super.initState();
     _widgetOptions.addAll([
       ReceptionPage(),
-      ReceptionPage(),
+      SearchPage(),
       ReceptionPage(),
       ReceptionPage(),
       ReceptionPage()
