@@ -1,3 +1,5 @@
+import 'package:exeo/screens/map.dart';
+import 'package:exeo/screens/profil.dart';
 import 'package:exeo/screens/reception.dart';
 import 'package:exeo/screens/search.dart';
 import 'package:exeo/services/constant.dart';
@@ -35,8 +37,8 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
       ReceptionPage(),
       SearchPage(),
       ReceptionPage(),
-      ReceptionPage(),
-      ReceptionPage()
+      const MapWidget(),
+      const ProfilWidget()
     ]);
   }
 
