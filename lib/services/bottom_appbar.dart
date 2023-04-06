@@ -2,6 +2,7 @@ import 'package:exeo/screens/map.dart';
 import 'package:exeo/screens/profil.dart';
 import 'package:exeo/screens/reception.dart';
 import 'package:exeo/screens/search.dart';
+import 'package:exeo/screens/swipe.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,9 +35,9 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
   void initState() {
     super.initState();
     _widgetOptions.addAll([
-      ReceptionPage(),
-      SearchPage(),
-      ReceptionPage(),
+      const ReceptionPage(),
+      const SearchPageWidget(),
+      const SwipeWidget(),
       const MapWidget(),
       const ProfilWidget()
     ]);
@@ -55,8 +56,9 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 15,
         enableFeedback: true,
-        type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.shifting,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(FontAwesome5.home),
@@ -84,7 +86,7 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
         selectedIconTheme: const IconThemeData(color: coulBlack),
         unselectedIconTheme: const IconThemeData(color: Colors.grey),
         selectedFontSize: 10,
-        unselectedFontSize: 10,
+        unselectedFontSize: 5,
         selectedLabelStyle: const TextStyle(fontFamily: fontRubikRegular),
         unselectedLabelStyle: const TextStyle(fontFamily: fontRubikRegular),
         currentIndex: _selectedIndex,

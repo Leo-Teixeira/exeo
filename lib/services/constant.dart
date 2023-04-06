@@ -1,3 +1,5 @@
+import 'package:exeo/screens/notification.dart';
+import 'package:exeo/screens/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
@@ -38,8 +40,8 @@ PreferredSizeWidget? appBarReception(BuildContext context) {
     actions: [
       IconButton(
         onPressed: () {
-          // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (context) => const RecentCallWidget()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const NotifWidget()));
         },
         icon: const Icon(
           FontAwesome5.bell,
@@ -48,8 +50,11 @@ PreferredSizeWidget? appBarReception(BuildContext context) {
       ),
       IconButton(
         onPressed: () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (context) => const SettingsWidget()));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const SettingWidget(),
+            ),
+          );
         },
         icon: const Icon(
           FontAwesome5.cog,

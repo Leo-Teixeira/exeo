@@ -3,7 +3,6 @@ import 'package:exeo/screens/inscription.dart';
 import 'package:exeo/services/bottom_appbar.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
@@ -19,6 +18,7 @@ class LoginWidget extends ConsumerWidget {
   }
 }
 
+// ignore: must_be_immutable
 class LoginPage extends ConsumerWidget {
   final GlobalKey<FormState> _loginKey = GlobalKey();
   FocusNode identifiant = FocusNode();

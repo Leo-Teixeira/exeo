@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:exeo/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -13,5 +14,5 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
-  runApp(const LoginWidget());
+  runApp(const ProviderScope(child: LoginWidget()));
 }

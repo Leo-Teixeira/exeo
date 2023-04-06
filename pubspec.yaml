@@ -23,6 +23,9 @@ dependencies:
   geolocator: ^9.0.2
   latlong2: ^0.8.1
 
+  flutter_card_swiper: ^4.1.0+2
+  flutter_swiper: ^1.1.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
