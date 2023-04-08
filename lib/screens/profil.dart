@@ -290,12 +290,17 @@ Widget profilUser(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text("John Doe"),
-        Row(
-          children: const [
-            Text("108"),
-            Icon(Icons.person),
-            Text("Amis"),
-          ],
+        GestureDetector(
+          onTap: () {
+            //! faire la page qui liste tous les amis de mon profil
+          },
+          child: Row(
+            children: const [
+              Text("108"),
+              Icon(Icons.person),
+              Text("Amis"),
+            ],
+          ),
         )
       ],
     ),

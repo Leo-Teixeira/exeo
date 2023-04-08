@@ -1,3 +1,4 @@
+import 'package:exeo/screens/support.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -18,7 +19,7 @@ class SettingWidget extends ConsumerWidget {
             style: TextStyle(fontSize: 25),
           ),
           darkMode(),
-          contactSupport(),
+          contactSupport(context),
           cgu(),
           btnDeconnect(),
           const SizedBox(
@@ -47,11 +48,21 @@ Widget darkMode() {
   );
 }
 
-Widget contactSupport() {
-  return const ListTile(
-      leading: Icon(Icons.help),
-      title: Text("Contacter le support"),
-      trailing: Icon(Icons.arrow_forward_ios));
+Widget contactSupport(BuildContext context) {
+  return ListTile(
+    leading: const Icon(Icons.help),
+    title: const Text("Contacter le support"),
+    trailing: IconButton(
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const SupportWidget(),
+          ),
+        );
+      },
+      icon: Icon(Icons.arrow_forward_ios),
+    ),
+  );
 }
 
 Widget cgu() {
