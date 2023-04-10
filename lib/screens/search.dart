@@ -63,7 +63,10 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                 fontSize: 16,
               ),
               decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: coulCiel,
+                ),
                 suffixIcon: mode == ListSearch.SEARCH
                     ? IconButton(
                         onPressed: () {
@@ -74,11 +77,13 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                         },
                         icon: const Icon(
                           Icons.cancel,
+                          color: coulCiel,
                           size: 20,
                         ),
                       )
                     : null,
                 border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
                   borderSide: BorderSide(
                     width: 1,
                     color: coulGrey,
@@ -91,6 +96,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                   fontSize: 16,
                 ),
                 focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
                   borderSide: BorderSide(
                     width: 1,
                     color: coulGrey,

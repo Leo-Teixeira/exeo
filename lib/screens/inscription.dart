@@ -1,3 +1,4 @@
+import 'package:exeo/provider/login_provider.dart';
 import 'package:exeo/screens/login.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class InscriptionPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ModePassword pwdShow = ref.watch(showHidePawdProviderState);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -35,7 +37,7 @@ class InscriptionPage extends ConsumerWidget {
                 style: TextStyle(fontFamily: fontRubikBold, fontSize: 28),
               ),
               const SizedBox(
-                height: 20,
+                height: 44,
               ),
               Form(
                 key: _loginKey,
@@ -91,7 +93,7 @@ class InscriptionPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 26,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -143,7 +145,7 @@ class InscriptionPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 26,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -200,7 +202,7 @@ class InscriptionPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 26,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -253,7 +255,7 @@ class InscriptionPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 26,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -276,8 +278,8 @@ class InscriptionPage extends ConsumerWidget {
                           fontFamily: fontHindMaduraiMedium,
                           fontSize: 16,
                         ),
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
                               color: coulGrey,
@@ -285,22 +287,36 @@ class InscriptionPage extends ConsumerWidget {
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
                           hintText: "PlaceHolder",
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
                           ),
-                          suffixIcon: Icon(
-                            FontAwesome5.eye,
-                            color: coulBlack,
-                          ),
-                          focusedBorder: OutlineInputBorder(
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                if (pwdShow == ModePassword.SHOW) {
+                                  ref
+                                      .watch(showHidePawdProviderState.notifier)
+                                      .update((state) => ModePassword.HIDE);
+                                } else {
+                                  ref
+                                      .watch(showHidePawdProviderState.notifier)
+                                      .update((state) => ModePassword.SHOW);
+                                }
+                              },
+                              icon: Icon(
+                                pwdShow == ModePassword.SHOW
+                                    ? Icons.remove_red_eye_outlined
+                                    : FontAwesome5.eye_slash,
+                                color: coulBlack,
+                              )),
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
                               color: coulGrey,
                             ),
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             color: coulGrey,
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
@@ -310,7 +326,7 @@ class InscriptionPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 26,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -333,8 +349,8 @@ class InscriptionPage extends ConsumerWidget {
                           fontFamily: fontHindMaduraiMedium,
                           fontSize: 16,
                         ),
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
                               color: coulGrey,
@@ -342,22 +358,36 @@ class InscriptionPage extends ConsumerWidget {
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
                           hintText: "PlaceHolder",
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
                           ),
-                          suffixIcon: Icon(
-                            FontAwesome5.eye,
-                            color: coulBlack,
-                          ),
-                          focusedBorder: OutlineInputBorder(
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                if (pwdShow == ModePassword.SHOW) {
+                                  ref
+                                      .watch(showHidePawdProviderState.notifier)
+                                      .update((state) => ModePassword.HIDE);
+                                } else {
+                                  ref
+                                      .watch(showHidePawdProviderState.notifier)
+                                      .update((state) => ModePassword.SHOW);
+                                }
+                              },
+                              icon: Icon(
+                                pwdShow == ModePassword.SHOW
+                                    ? Icons.remove_red_eye_outlined
+                                    : FontAwesome5.eye_slash,
+                                color: coulBlack,
+                              )),
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
                               color: coulGrey,
                             ),
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             color: coulGrey,
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
@@ -367,7 +397,7 @@ class InscriptionPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -406,6 +436,7 @@ class InscriptionPage extends ConsumerWidget {
                         ),
                         TextButton(
                           onPressed: () {
+                            ref.refresh(showHidePawdProviderState);
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()));
@@ -413,6 +444,7 @@ class InscriptionPage extends ConsumerWidget {
                           child: const Text(
                             "Connectez-vous",
                             style: TextStyle(
+                              color: coulCiel,
                               decoration: TextDecoration.underline,
                               fontFamily: fontHindMaduraiRegular,
                               fontSize: 12,

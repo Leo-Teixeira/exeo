@@ -2,6 +2,7 @@ import 'package:exeo/screens/notification.dart';
 import 'package:exeo/screens/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/typicons_icons.dart';
 
 const Color coulCiel = Color(0xFF0FBBE9);
 const Color coulCielFonce = Color(0xFF4C89FF);
@@ -33,9 +34,10 @@ const String fontHindMaduraiBold = 'HindMaduraiBold';
 PreferredSizeWidget? appBarReception(BuildContext context) {
   return AppBar(
     backgroundColor: coulWhite,
-    title: const Text(
-      "Exeo",
-      style: TextStyle(color: coulBlack),
+    title: Image.asset(
+      "assets/pictures/MPD.png",
+      width: 100,
+      height: 100,
     ),
     actions: [
       IconButton(
@@ -44,7 +46,7 @@ PreferredSizeWidget? appBarReception(BuildContext context) {
               MaterialPageRoute(builder: (context) => const NotifWidget()));
         },
         icon: const Icon(
-          FontAwesome5.bell,
+          Icons.notifications_none,
           color: coulBlack,
         ),
       ),
@@ -57,7 +59,7 @@ PreferredSizeWidget? appBarReception(BuildContext context) {
           );
         },
         icon: const Icon(
-          FontAwesome5.cog,
+          Typicons.cog_outline,
           color: coulBlack,
         ),
       ),

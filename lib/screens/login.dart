@@ -1,3 +1,4 @@
+import 'package:exeo/provider/login_provider.dart';
 import 'package:exeo/screens/forgot_password.dart';
 import 'package:exeo/screens/inscription.dart';
 import 'package:exeo/services/bottom_appbar.dart';
@@ -30,6 +31,7 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ModePassword pwdShow = ref.watch(showHidePawdProviderState);
     return Scaffold(
       body: Center(
         child: Column(
@@ -40,7 +42,7 @@ class LoginPage extends ConsumerWidget {
               style: TextStyle(fontFamily: fontRubikBold, fontSize: 28),
             ),
             const SizedBox(
-              height: 20,
+              height: 44,
             ),
             Form(
               key: _loginKey,
@@ -110,6 +112,8 @@ class LoginPage extends ConsumerWidget {
                             // autofillHints: const [AutofillHints.email],
                             textInputAction: TextInputAction.next,
                             focusNode: password,
+                            obscureText:
+                                pwdShow == ModePassword.HIDE ? true : false,
                             onFieldSubmitted: (term) {
                               identifiant.unfocus();
                               FocusScope.of(context).requestFocus(password);
@@ -125,8 +129,8 @@ class LoginPage extends ConsumerWidget {
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 1,
                                   color: coulGrey,
@@ -134,22 +138,38 @@ class LoginPage extends ConsumerWidget {
                                 // borderRadius: BorderRadius.circular(30.0),
                               ),
                               hintText: "PlaceHolder",
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontFamily: fontHindMaduraiMedium,
                                 fontSize: 16,
                               ),
-                              suffixIcon: Icon(
-                                FontAwesome5.eye,
-                                color: coulBlack,
-                              ),
-                              focusedBorder: OutlineInputBorder(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    if (pwdShow == ModePassword.SHOW) {
+                                      ref
+                                          .watch(showHidePawdProviderState
+                                              .notifier)
+                                          .update((state) => ModePassword.HIDE);
+                                    } else {
+                                      ref
+                                          .watch(showHidePawdProviderState
+                                              .notifier)
+                                          .update((state) => ModePassword.SHOW);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    pwdShow == ModePassword.SHOW
+                                        ? Icons.remove_red_eye_outlined
+                                        : FontAwesome5.eye_slash,
+                                    color: coulBlack,
+                                  )),
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 1,
                                   color: coulGrey,
                                 ),
                                 // borderRadius: BorderRadius.circular(30.0),
                               ),
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: coulGrey,
                                 fontFamily: fontHindMaduraiMedium,
                                 fontSize: 16,
@@ -169,6 +189,7 @@ class LoginPage extends ConsumerWidget {
                             child: const Text(
                               "Mot de passe oublié ?",
                               style: TextStyle(
+                                  color: coulBlack,
                                   decoration: TextDecoration.underline,
                                   fontFamily: fontHindMaduraiRegular,
                                   fontSize: 12),
@@ -178,7 +199,7 @@ class LoginPage extends ConsumerWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -215,18 +236,21 @@ class LoginPage extends ConsumerWidget {
                         const Text(
                           "Vous n'avez pas de compte ?",
                           style: TextStyle(
+                            color: coulBlack,
                             fontFamily: fontHindMaduraiRegular,
                             fontSize: 12,
                           ),
                         ),
                         TextButton(
                           onPressed: () {
+                            ref.refresh(showHidePawdProviderState);
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => InscriptionPage()));
                           },
                           child: const Text(
                             "Inscrivez-vous",
                             style: TextStyle(
+                              color: coulCiel,
                               decoration: TextDecoration.underline,
                               fontFamily: fontHindMaduraiRegular,
                               fontSize: 12,

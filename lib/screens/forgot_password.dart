@@ -27,7 +27,7 @@ class ForgotPasswordPage extends ConsumerWidget {
               style: TextStyle(fontFamily: fontRubikBold, fontSize: 28),
             ),
             const SizedBox(
-              height: 20,
+              height: 44,
             ),
             Form(
               key: _loginKey,
@@ -84,7 +84,7 @@ class ForgotPasswordPage extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 26,
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -136,7 +136,7 @@ class ForgotPasswordPage extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 26,
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -188,7 +188,7 @@ class ForgotPasswordPage extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -222,6 +222,7 @@ class ForgotPasswordPage extends ConsumerWidget {
                     child: const Text(
                       "Retour",
                       style: TextStyle(
+                        color: coulCiel,
                         decoration: TextDecoration.underline,
                         fontFamily: fontHindMaduraiRegular,
                         fontSize: 12,

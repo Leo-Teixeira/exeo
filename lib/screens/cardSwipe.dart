@@ -1,4 +1,5 @@
 import 'package:exeo/screens/more_info.dart';
+import 'package:exeo/services/constant.dart';
 import 'package:exeo/services/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +25,7 @@ class SwipeCardWidget extends ConsumerWidget {
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -58,65 +59,85 @@ class SwipeCardWidget extends ConsumerWidget {
                   Text(
                     candidate.name,
                     style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+                      color: coulBlack,
+                      fontFamily: fontRubikMedium,
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(height: 5),
-                  TextButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                        const RoundedRectangleBorder(
-                          side: BorderSide(width: 1),
-                        ),
-                      ),
+                  const SizedBox(height: 10),
+                  for (int i = 0; i < 2; i++)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        for (int i = 0; i < 3; i++)
+                          TextButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<OutlinedBorder>(
+                                const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  side: BorderSide(width: 1),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              candidate.job,
+                              style: const TextStyle(
+                                  fontFamily: fontHindMaduraiMedium,
+                                  fontSize: 16,
+                                  color: coulBlack),
+                            ),
+                          ),
+                      ],
                     ),
-                    child: Text(
-                      candidate.job,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    candidate.city,
-                    style: const TextStyle(color: Colors.grey),
+                  const SizedBox(height: 10),
+                  //! faire un voir plus pour cette partie car description trop longue
+                  const Text(
+                    "Lorem ipsum dolor sit amet consectetur. In pellentesque pharetra tincidunt neque vulputate dignissim at. Scelerisque cras quis dictum tellus mi consectetur. Fringilla id adipiscing turpis convallis rutrum pellentesque amet tincidunt. ",
+                    style: TextStyle(
+                        color: coulBlack,
+                        fontFamily: fontHindMaduraiRegular,
+                        fontSize: 16),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      OutlinedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            const CircleBorder(
-                              side: BorderSide(width: 1),
-                            ),
-                          ),
-                        ),
+                      FloatingActionButton(
+                        backgroundColor: coulWhite,
+                        splashColor: Colors.red,
                         onPressed: () {},
-                        child: Icon(Icons.thumb_down_alt),
+                        child: const Icon(
+                          Icons.thumb_down_alt,
+                          color: Colors.red,
+                          size: 50,
+                        ),
                       ),
-                      OutlinedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            const CircleBorder(
-                              side: BorderSide(width: 1),
+                      FloatingActionButton(
+                        backgroundColor: coulWhite,
+                        splashColor: coulCiel,
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const MoreInfoWidget(),
                             ),
-                          ),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.remove_red_eye,
+                          color: coulCiel,
+                          size: 50,
                         ),
-                        onPressed: () {},
-                        child: Icon(Icons.remove_red_eye),
                       ),
-                      OutlinedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            const CircleBorder(
-                              side: BorderSide(width: 1),
-                            ),
-                          ),
-                        ),
+                      FloatingActionButton(
+                        backgroundColor: coulWhite,
+                        splashColor: Colors.green,
                         onPressed: () {},
-                        child: Icon(Icons.thumb_up_alt),
+                        child: const Icon(
+                          Icons.thumb_up_alt,
+                          color: Colors.green,
+                          size: 50,
+                        ),
                       ),
                     ],
                   ),

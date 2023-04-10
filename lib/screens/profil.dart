@@ -2,7 +2,9 @@ import 'package:exeo/provider/profil_provider.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/typicons_icons.dart';
 
 class ProfilWidget extends ConsumerWidget {
   const ProfilWidget({super.key});
@@ -52,6 +54,9 @@ Widget tabBarEventSwipe() {
               Icons.bookmark_add,
               color: coulBlack,
             ),
+            SizedBox(
+              width: 5,
+            ),
             Text(
               "Evenements",
               style: TextStyle(color: coulBlack),
@@ -64,8 +69,11 @@ Widget tabBarEventSwipe() {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(
-              Icons.arrow_back_ios,
+              Entypo.switch_icon,
               color: coulBlack,
+            ),
+            SizedBox(
+              width: 5,
             ),
             Text(
               "Swipe",
@@ -283,22 +291,46 @@ Widget profilUser(
     WidgetRef ref, ModifMyProfil modif, EditMyPasswordProfil edit) {
   return ListTile(
     leading: const CircleAvatar(
-      child: Icon(Icons.person),
+      radius: 30,
+      child: Icon(
+        Icons.person,
+        size: 50,
+      ),
     ),
-    title: const Text("JohnDoe_"),
+    title: const Text(
+      "JohnDoe_",
+      style: TextStyle(fontSize: 16, fontFamily: fontRubikRegular),
+    ),
     subtitle: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("John Doe"),
+        const Text(
+          "John Doe",
+          style: TextStyle(fontSize: 14, fontFamily: fontHindMaduraiRegular),
+        ),
         GestureDetector(
           onTap: () {
             //! faire la page qui liste tous les amis de mon profil
           },
           child: Row(
             children: const [
-              Text("108"),
-              Icon(Icons.person),
-              Text("Amis"),
+              Text(
+                "108",
+                style:
+                    TextStyle(fontSize: 14, fontFamily: fontHindMaduraiRegular),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Icon(
+                Icons.person,
+                size: 14,
+              ),
+              Text(
+                "Amis",
+                style:
+                    TextStyle(fontSize: 14, fontFamily: fontHindMaduraiRegular),
+              ),
             ],
           ),
         )
@@ -312,12 +344,29 @@ Widget profilUser(
         children: [
           modif == ModifMyProfil.UNMODIF
               ? ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(coulCiel),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     ref
                         .watch(modifMyProfilProvider.notifier)
                         .update((state) => ModifMyProfil.MODIF);
+                    ref
+                        .watch(editMyPasswordProfilProvider.notifier)
+                        .update((state) => EditMyPasswordProfil.UNEDIT);
                   },
-                  child: const Text("Modifier"),
+                  child: const Text(
+                    "Modifier",
+                    style: TextStyle(
+                        fontFamily: fontHindMaduraiMedium,
+                        fontSize: 16,
+                        color: coulBlack),
+                  ),
                 )
               : Container(),
           edit == EditMyPasswordProfil.UNEDIT
@@ -330,7 +379,10 @@ Widget profilUser(
                         .watch(modifMyProfilProvider.notifier)
                         .update((state) => ModifMyProfil.UNMODIF);
                   },
-                  icon: const Icon(FontAwesome5.cog),
+                  icon: const Icon(
+                    Typicons.cog_outline,
+                    color: coulBlack,
+                  ),
                 )
               : Container(),
           modif == ModifMyProfil.MODIF || edit == EditMyPasswordProfil.EDIT
