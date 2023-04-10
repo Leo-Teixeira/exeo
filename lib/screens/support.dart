@@ -10,15 +10,29 @@ class SupportWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: appBarReception(context),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          titleSupport(context),
-          formSupport(),
-        ],
+      body: Container(
+        margin: const EdgeInsets.only(left: 15, right: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            titleSupport(context),
+            Container(
+              height: 1,
+              color: coulBlack,
+              child: const Divider(
+                color: coulBlack,
+                height: 0,
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            formSupport(),
+          ],
+        ),
       ),
     );
   }
@@ -38,10 +52,10 @@ Widget titleSupport(BuildContext context) {
         child: Text(
           "Support",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 20, fontFamily: fontRubikMedium),
         ),
       ),
-      //! penser à rajoutez une ligne comme sur la maquette et à centrer le texte
+      //! centrer le texte
     ],
   );
 }
@@ -57,10 +71,10 @@ Widget formSupport() {
       children: [
         const Text(
           "Sujet de votre demande : ",
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16, fontFamily: fontHindMaduraiMedium),
         ),
         const SizedBox(
-          height: 10,
+          height: 5,
         ),
         DropdownButton<String>(
           items: prob.map((String value) {
@@ -69,15 +83,19 @@ Widget formSupport() {
               child: Text(value),
             );
           }).toList(),
-          hint: Text("J'ai trouvé un bug"),
+          hint: const Text(
+            "J'ai trouvé un bug",
+            style: TextStyle(fontFamily: fontHindMaduraiMedium, fontSize: 16),
+          ),
           onChanged: (_) {},
+          isExpanded: true,
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
         const Text(
           "Votre message : ",
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16, fontFamily: fontHindMaduraiMedium),
         ),
         const SizedBox(
           height: 10,
@@ -125,28 +143,25 @@ Widget formSupport() {
           ),
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: OutlinedButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
-              minimumSize: MaterialStateProperty.all<Size?>(
-                const Size(500.0, 40.0),
-              ),
-              padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
-                const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
-              ),
+        OutlinedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
+            minimumSize: MaterialStateProperty.all<Size?>(
+              const Size(500.0, 40.0),
             ),
-            child: const Text(
-              "Envoyer",
-              style: TextStyle(
-                color: coulBlack,
-                fontFamily: fontHindMaduraiMedium,
-                fontSize: 16,
-              ),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+              const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+            ),
+          ),
+          child: const Text(
+            "Envoyer",
+            style: TextStyle(
+              color: coulBlack,
+              fontFamily: fontHindMaduraiMedium,
+              fontSize: 16,
             ),
           ),
         ),

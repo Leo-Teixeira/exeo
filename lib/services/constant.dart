@@ -33,6 +33,7 @@ const String fontHindMaduraiBold = 'HindMaduraiBold';
 
 PreferredSizeWidget? appBarReception(BuildContext context) {
   return AppBar(
+    automaticallyImplyLeading: false,
     backgroundColor: coulWhite,
     title: Image.asset(
       "assets/pictures/MPD.png",

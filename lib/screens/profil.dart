@@ -28,6 +28,9 @@ class ProfilWidget extends ConsumerWidget {
                 ? modifUser(context, modif)
                 : Container(),
             tabBarEventSwipe(),
+            const SizedBox(
+              height: 15,
+            ),
             Expanded(
               child: TabBarView(
                 children: [
@@ -94,195 +97,233 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
     focusController.add(FocusNode());
   }
   return Form(
-    child: Column(
-      children: [
-        const SizedBox(
-          height: 8,
-        ),
-        TextFormField(
-          textInputAction: TextInputAction.next,
-          focusNode: modif == ModifMyProfil.MODIF
-              ? focusController[0]
-              : focusController[3],
-          onFieldSubmitted: (term) {
-            modif == ModifMyProfil.MODIF
-                ? focusController[0].unfocus()
-                : focusController[3].unfocus();
-            modif == ModifMyProfil.MODIF
-                ? FocusScope.of(context).requestFocus(focusController[1])
-                : FocusScope.of(context).requestFocus(focusController[4]);
-          },
-          controller: modif == ModifMyProfil.MODIF
-              ? textController[0]
-              : textController[3],
-          style: const TextStyle(
-            fontFamily: fontHindMaduraiMedium,
-            fontSize: 16,
+    child: Container(
+      margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: Column(
+        children: [
+          const SizedBox(height: 18),
+          modif == ModifMyProfil.MODIF
+              ? Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 30,
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(coulYellow),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Modifier photo de profil',
+                        style: TextStyle(
+                            color: coulBlack,
+                            fontFamily: fontHindMaduraiMedium,
+                            fontSize: 16),
+                      ),
+                    ),
+                  ],
+                )
+              : Container(),
+          const SizedBox(
+            height: 12,
           ),
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: coulGrey,
+          TextFormField(
+            textInputAction: TextInputAction.next,
+            focusNode: modif == ModifMyProfil.MODIF
+                ? focusController[0]
+                : focusController[3],
+            onFieldSubmitted: (term) {
+              modif == ModifMyProfil.MODIF
+                  ? focusController[0].unfocus()
+                  : focusController[3].unfocus();
+              modif == ModifMyProfil.MODIF
+                  ? FocusScope.of(context).requestFocus(focusController[1])
+                  : FocusScope.of(context).requestFocus(focusController[4]);
+            },
+            controller: modif == ModifMyProfil.MODIF
+                ? textController[0]
+                : textController[3],
+            style: const TextStyle(
+              fontFamily: fontHindMaduraiMedium,
+              fontSize: 16,
+            ),
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: coulGrey,
+                ),
+                // borderRadius: BorderRadius.(),
               ),
-              // borderRadius: BorderRadius.(),
-            ),
-            hintText: "PlaceHolder",
-            hintStyle: const TextStyle(
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: coulGrey,
+              hintText: "PlaceHolder",
+              hintStyle: const TextStyle(
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
               ),
-              // borderRadius: BorderRadius.circular(30.0),
-            ),
-            labelStyle: const TextStyle(
-              color: coulGrey,
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
-            labelText: modif == ModifMyProfil.MODIF
-                ? "Votre pseudo"
-                : "Votre adresse mail",
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        TextFormField(
-          textInputAction: TextInputAction.next,
-          focusNode: modif == ModifMyProfil.MODIF
-              ? focusController[1]
-              : focusController[4],
-          onFieldSubmitted: (term) {
-            modif == ModifMyProfil.MODIF
-                ? focusController[1].unfocus()
-                : focusController[4].unfocus();
-            modif == ModifMyProfil.MODIF
-                ? FocusScope.of(context).requestFocus(focusController[2])
-                : FocusScope.of(context).requestFocus(focusController[5]);
-          },
-          controller: modif == ModifMyProfil.MODIF
-              ? textController[1]
-              : textController[4],
-          style: const TextStyle(
-            fontFamily: fontHindMaduraiMedium,
-            fontSize: 16,
-          ),
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: coulGrey,
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: coulGrey,
+                ),
+                // borderRadius: BorderRadius.circular(30.0),
               ),
-              // borderRadius: BorderRadius.(),
-            ),
-            hintText: "PlaceHolder",
-            hintStyle: const TextStyle(
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
+              labelStyle: const TextStyle(
                 color: coulGrey,
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
               ),
-              // borderRadius: BorderRadius.circular(30.0),
+              labelText: modif == ModifMyProfil.MODIF
+                  ? "Votre pseudo"
+                  : "Votre adresse mail",
             ),
-            labelStyle: const TextStyle(
-              color: coulGrey,
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          TextFormField(
+            textInputAction: TextInputAction.next,
+            focusNode: modif == ModifMyProfil.MODIF
+                ? focusController[1]
+                : focusController[4],
+            onFieldSubmitted: (term) {
+              modif == ModifMyProfil.MODIF
+                  ? focusController[1].unfocus()
+                  : focusController[4].unfocus();
+              modif == ModifMyProfil.MODIF
+                  ? FocusScope.of(context).requestFocus(focusController[2])
+                  : FocusScope.of(context).requestFocus(focusController[5]);
+            },
+            controller: modif == ModifMyProfil.MODIF
+                ? textController[1]
+                : textController[4],
+            style: const TextStyle(
               fontFamily: fontHindMaduraiMedium,
               fontSize: 16,
             ),
-            labelText: modif == ModifMyProfil.MODIF
-                ? "Votre prénom"
-                : "Nouveau mot de passe",
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        TextFormField(
-          textInputAction: TextInputAction.next,
-          focusNode: modif == ModifMyProfil.MODIF
-              ? focusController[2]
-              : focusController[5],
-          onFieldSubmitted: (term) {
-            modif == ModifMyProfil.MODIF
-                ? focusController[2].unfocus()
-                : focusController[5].unfocus();
-          },
-          controller: modif == ModifMyProfil.MODIF
-              ? textController[2]
-              : textController[5],
-          style: const TextStyle(
-            fontFamily: fontHindMaduraiMedium,
-            fontSize: 16,
-          ),
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: coulGrey,
+                ),
+                // borderRadius: BorderRadius.(),
+              ),
+              hintText: "PlaceHolder",
+              hintStyle: const TextStyle(
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: coulGrey,
+                ),
+                // borderRadius: BorderRadius.circular(30.0),
+              ),
+              labelStyle: const TextStyle(
                 color: coulGrey,
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
               ),
-              // borderRadius: BorderRadius.(),
+              labelText: modif == ModifMyProfil.MODIF
+                  ? "Votre prénom"
+                  : "Nouveau mot de passe",
             ),
-            hintText: "PlaceHolder",
-            hintStyle: const TextStyle(
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          TextFormField(
+            textInputAction: TextInputAction.next,
+            focusNode: modif == ModifMyProfil.MODIF
+                ? focusController[2]
+                : focusController[5],
+            onFieldSubmitted: (term) {
+              modif == ModifMyProfil.MODIF
+                  ? focusController[2].unfocus()
+                  : focusController[5].unfocus();
+            },
+            controller: modif == ModifMyProfil.MODIF
+                ? textController[2]
+                : textController[5],
+            style: const TextStyle(
               fontFamily: fontHindMaduraiMedium,
               fontSize: 16,
             ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: coulGrey,
+                ),
+                // borderRadius: BorderRadius.(),
+              ),
+              hintText: "PlaceHolder",
+              hintStyle: const TextStyle(
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 1,
+                  color: coulGrey,
+                ),
+                // borderRadius: BorderRadius.circular(30.0),
+              ),
+              labelStyle: const TextStyle(
                 color: coulGrey,
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
               ),
-              // borderRadius: BorderRadius.circular(30.0),
-            ),
-            labelStyle: const TextStyle(
-              color: coulGrey,
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
-            labelText: modif == ModifMyProfil.MODIF
-                ? "Votre nom"
-                : "Confirmer nouveau mot de passe",
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        OutlinedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
-            minimumSize: MaterialStateProperty.all<Size?>(
-              const Size(500.0, 40.0),
-            ),
-            padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
-              const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+              labelText: modif == ModifMyProfil.MODIF
+                  ? "Votre nom"
+                  : "Confirmer nouveau mot de passe",
             ),
           ),
-          onPressed: () {
-            modif == ModifMyProfil.MODIF
-                ? print("modif reussi")
-                : print("edition reussi");
-          },
-          child: const Text(
-            "Enregistrer",
-            style: TextStyle(
-              color: coulBlack,
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
+          const SizedBox(
+            height: 12,
+          ),
+          OutlinedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
+              minimumSize: MaterialStateProperty.all<Size?>(
+                const Size(500.0, 40.0),
+              ),
+              padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+                const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+              ),
+            ),
+            onPressed: () {
+              modif == ModifMyProfil.MODIF
+                  ? print("modif reussi")
+                  : print("edition reussi");
+            },
+            child: const Text(
+              "Enregistrer",
+              style: TextStyle(
+                color: coulBlack,
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+              ),
             ),
           ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-      ],
+          const SizedBox(
+            height: 8,
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -413,6 +454,8 @@ Widget listEvenementLike() {
       padding: const EdgeInsets.all(5),
       itemBuilder: (context, index) {
         return Container(
+          margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+          height: 112,
           decoration: BoxDecoration(
             border: Border.all(
                 width: 1.0, color: coulBlack, style: BorderStyle.solid),
@@ -420,31 +463,66 @@ Widget listEvenementLike() {
           ),
           child: ListTile(
             onTap: () {},
-            leading: Image.asset("assets/pictures/test.jpeg"),
-            title: const Text(
-              "Event name",
-              style: TextStyle(
-                fontFamily: fontHindMaduraiRegular,
-                fontSize: 16,
+            leading: Expanded(
+              child: Container(
+                margin: EdgeInsets.fromLTRB(24, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      "assets/pictures/test.jpeg",
+                      width: 40,
+                      height: 40,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Event name",
+                      style: TextStyle(
+                        fontFamily: fontHindMaduraiRegular,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Text(
+                      "Description",
+                      style: TextStyle(
+                        fontFamily: fontHindMaduraiRegular,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            subtitle: const Text(
-              "Description",
-              style: TextStyle(
-                fontFamily: fontHindMaduraiRegular,
-                fontSize: 12,
+            // title: const Text(
+            //   "Event name",
+            //   style: TextStyle(
+            //     fontFamily: fontHindMaduraiRegular,
+            //     fontSize: 16,
+            //   ),
+            // ),
+            // subtitle: const Text(
+            //   "Description",
+            //   style: TextStyle(
+            //     fontFamily: fontHindMaduraiRegular,
+            //     fontSize: 12,
+            //   ),
+            // ),
+            trailing: Container(
+              margin: const EdgeInsets.fromLTRB(0, 35, 0, 0),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(FontAwesome5.bookmark),
               ),
-            ),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(FontAwesome5.bookmark),
             ),
           ),
         );
       },
       separatorBuilder: (context, index) {
         return const SizedBox(
-          height: 10,
+          height: 15,
         );
       },
       itemCount: 10);
@@ -455,6 +533,8 @@ Widget listSwipeLike() {
       padding: const EdgeInsets.all(5),
       itemBuilder: (context, index) {
         return Container(
+          margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+          height: 112,
           decoration: BoxDecoration(
             border: Border.all(
                 width: 1.0, color: coulBlack, style: BorderStyle.solid),
@@ -462,24 +542,55 @@ Widget listSwipeLike() {
           ),
           child: ListTile(
             onTap: () {},
-            leading: Image.asset("assets/pictures/test.jpeg"),
-            title: const Text(
-              "Event name",
-              style: TextStyle(
-                fontFamily: fontHindMaduraiRegular,
-                fontSize: 16,
+            leading: Expanded(
+              child: Container(
+                margin: EdgeInsets.fromLTRB(24, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      "assets/pictures/test.jpeg",
+                      width: 40,
+                      height: 40,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Lieu",
+                      style: TextStyle(
+                        fontFamily: fontHindMaduraiRegular,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            subtitle: const Text(
-              "Description",
-              style: TextStyle(
-                fontFamily: fontHindMaduraiRegular,
-                fontSize: 12,
+            // title: const Text(
+            //   "Event name",
+            //   style: TextStyle(
+            //     fontFamily: fontHindMaduraiRegular,
+            //     fontSize: 16,
+            //   ),
+            // ),
+            // subtitle: const Text(
+            //   "Description",
+            //   style: TextStyle(
+            //     fontFamily: fontHindMaduraiRegular,
+            //     fontSize: 12,
+            //   ),
+            // ),
+            trailing: Container(
+              margin: const EdgeInsets.fromLTRB(0, 27, 0, 0),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.delete_outline,
+                  size: 40,
+                ),
               ),
-            ),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.delete),
             ),
           ),
         );

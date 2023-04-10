@@ -1,3 +1,4 @@
+import 'package:exeo/provider/settings_provider.dart';
 import 'package:exeo/screens/support.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +10,20 @@ class SettingWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ThemeModeApp theme = ref.watch(themeModeProviderState);
     return Scaffold(
       appBar: appBarReception(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Paramètres : ",
-            style: TextStyle(fontSize: 25),
+          Container(
+            margin: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+            child: const Text(
+              "Paramètres : ",
+              style: TextStyle(fontSize: 20, fontFamily: fontRubikMedium),
+            ),
           ),
-          darkMode(),
+          darkMode(ref, theme),
           contactSupport(context),
           cgu(),
           btnDeconnect(),
@@ -32,14 +37,30 @@ class SettingWidget extends ConsumerWidget {
   }
 }
 
-Widget darkMode() {
+Widget darkMode(WidgetRef ref, ThemeModeApp theme) {
   return ListTile(
-    leading: const Icon(Icons.dark_mode),
+    leading: const Icon(Icons.dark_mode_outlined),
     // ! changer le text selon si darkMode actif ou non
-    title: const Text("Activer le dark mode"),
+    title: theme == ThemeModeApp.LIGHTMODE
+        ? const Text(
+            "Activer le dark mode",
+            style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16),
+          )
+        : const Text('Désactiver le dark mode',
+            style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16)),
     trailing: Switch(
-      onChanged: (value) {},
-      value: true,
+      onChanged: (value) {
+        if (value == true) {
+          ref
+              .watch(themeModeProviderState.notifier)
+              .update((state) => ThemeModeApp.DARKMODE);
+        } else {
+          ref
+              .watch(themeModeProviderState.notifier)
+              .update((state) => ThemeModeApp.LIGHTMODE);
+        }
+      },
+      value: theme == ThemeModeApp.DARKMODE ? true : false,
       // activeColor: Colors.blue,
       // activeTrackColor: Colors.yellow,
       // inactiveThumbColor: Colors.redAccent,
@@ -50,8 +71,13 @@ Widget darkMode() {
 
 Widget contactSupport(BuildContext context) {
   return ListTile(
-    leading: const Icon(Icons.help),
-    title: const Text("Contacter le support"),
+    leading: const Icon(
+      Icons.help,
+    ),
+    title: const Text(
+      "Contacter le support",
+      style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16),
+    ),
     trailing: IconButton(
       onPressed: () {
         Navigator.of(context).push(
@@ -60,16 +86,23 @@ Widget contactSupport(BuildContext context) {
           ),
         );
       },
-      icon: Icon(Icons.arrow_forward_ios),
+      icon: const Icon(Icons.arrow_forward_ios),
     ),
   );
 }
 
 Widget cgu() {
-  return const ListTile(
-      leading: Icon(Icons.info_outline),
-      title: Text("Conditions Générales d'Utilisation"),
-      trailing: Icon(Icons.arrow_forward_ios));
+  return ListTile(
+    leading: const Icon(Icons.info_outline),
+    title: const Text(
+      "Conditions Générales d'Utilisation",
+      style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16),
+    ),
+    trailing: Container(
+      margin: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+      child: const Icon(Icons.arrow_forward_ios),
+    ),
+  );
 }
 
 Widget btnDeconnect() {
