@@ -34,7 +34,7 @@ const String fontHindMaduraiBold = 'HindMaduraiBold';
 PreferredSizeWidget? appBarReception(BuildContext context) {
   return AppBar(
     automaticallyImplyLeading: false,
-    backgroundColor: coulWhite,
+    backgroundColor: coulBlack,
     title: Image.asset(
       "assets/pictures/MPD.png",
       width: 100,
@@ -48,7 +48,7 @@ PreferredSizeWidget? appBarReception(BuildContext context) {
         },
         icon: const Icon(
           Icons.notifications_none,
-          color: coulBlack,
+          color: coulWhite,
         ),
       ),
       IconButton(
@@ -61,7 +61,7 @@ PreferredSizeWidget? appBarReception(BuildContext context) {
         },
         icon: const Icon(
           Typicons.cog_outline,
-          color: coulBlack,
+          color: coulWhite,
         ),
       ),
     ],

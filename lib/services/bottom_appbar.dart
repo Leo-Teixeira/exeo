@@ -56,9 +56,10 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: coulBlack,
         elevation: 15,
         enableFeedback: true,
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(FontAwesome5.home),
@@ -81,10 +82,10 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
             label: 'Profil',
           ),
         ],
-        selectedItemColor: coulBlack,
-        unselectedItemColor: Colors.grey,
-        selectedIconTheme: const IconThemeData(color: coulBlack),
-        unselectedIconTheme: const IconThemeData(color: Colors.grey),
+        selectedItemColor: coulWhite,
+        unselectedItemColor: coulWhiteGrey,
+        selectedIconTheme: const IconThemeData(color: coulWhite),
+        unselectedIconTheme: const IconThemeData(color: coulWhite),
         selectedFontSize: 10,
         unselectedFontSize: 5,
         selectedLabelStyle: const TextStyle(fontFamily: fontRubikRegular),

@@ -1,3 +1,4 @@
+import 'package:exeo/provider/reception_provider.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,19 +11,27 @@ class MoreInfoWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: coulBlack,
       appBar: appBarReception(context),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 12,
-            ),
-            titlePage(context),
-            const SizedBox(
-              height: 24,
-            ),
-            bodyPage(),
-          ],
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("./assets/pictures/real_background.png"),
+              fit: BoxFit.cover),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 12,
+              ),
+              titlePage(context),
+              const SizedBox(
+                height: 24,
+              ),
+              bodyPage(ref),
+            ],
+          ),
         ),
       ),
     );
@@ -46,7 +55,8 @@ Widget titlePage(BuildContext context) {
   );
 }
 
-Widget bodyPage() {
+Widget bodyPage(WidgetRef ref) {
+  TypeInfo type = ref.watch(typeInfoStateProvider);
   return Container(
     margin: const EdgeInsets.only(left: 15, right: 15),
     child: Column(
@@ -151,16 +161,20 @@ Widget bodyPage() {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text(
-                "Enregistrer l'évènement",
-                style: TextStyle(
+                type == TypeInfo.EVENEMENT
+                    ? "Enregistrer l'évènement"
+                    : "Sauvegarder",
+                style: const TextStyle(
                   color: coulBlack,
                   fontFamily: fontHindMaduraiMedium,
                   fontSize: 16,
                 ),
               ),
-              Icon(Icons.bookmark_add)
+              type == TypeInfo.EVENEMENT
+                  ? const Icon(Icons.bookmark_add)
+                  : Container()
             ],
           ),
         ),
@@ -183,13 +197,23 @@ Widget bodyPage() {
               ),
             ),
           ),
-          child: const Text(
-            "Participer",
-            style: TextStyle(
-              color: coulBlack,
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                type == TypeInfo.EVENEMENT
+                    ? "Participer"
+                    : "Enregistrer l'évènement",
+                style: const TextStyle(
+                  color: coulBlack,
+                  fontFamily: fontHindMaduraiMedium,
+                  fontSize: 16,
+                ),
+              ),
+              type == TypeInfo.LIEU
+                  ? const Icon(Icons.bookmark_add)
+                  : Container()
+            ],
           ),
         ),
         const SizedBox(

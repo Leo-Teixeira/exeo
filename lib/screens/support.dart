@@ -9,29 +9,37 @@ class SupportWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: coulBlack,
       appBar: appBarReception(context),
-      body: Container(
-        margin: const EdgeInsets.only(left: 15, right: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            titleSupport(context),
-            Container(
-              height: 1,
-              color: coulBlack,
-              child: const Divider(
-                color: coulBlack,
-                height: 0,
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("./assets/pictures/real_background.png"),
+              fit: BoxFit.cover),
+        ),
+        child: Container(
+          margin: const EdgeInsets.only(left: 15, right: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            formSupport(),
-          ],
+              titleSupport(context),
+              Container(
+                height: 1,
+                color: coulBlack,
+                child: const Divider(
+                  color: coulBlack,
+                  height: 0,
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              formSupport(),
+            ],
+          ),
         ),
       ),
     );

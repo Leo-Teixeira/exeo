@@ -24,25 +24,32 @@ class SwipeWidgetState extends ConsumerState<SwipeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: coulBlack,
       appBar: appBarReception(context),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Flexible(
-              child: CardSwiper(
-                
-                isLoop: true,
-                controller: controller,
-                cardsCount: cards.length,
-                numberOfCardsDisplayed: 3,
-                onSwipe: _onSwipe,
-                onUndo: _onUndo,
-                padding: const EdgeInsets.all(24.0),
-                cardBuilder: (context, index) => cards[index],
-                isVerticalSwipingEnabled: false,
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("./assets/pictures/real_background.png"),
+              fit: BoxFit.cover),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Flexible(
+                child: CardSwiper(
+                  isLoop: true,
+                  controller: controller,
+                  cardsCount: cards.length,
+                  numberOfCardsDisplayed: 3,
+                  onSwipe: _onSwipe,
+                  onUndo: _onUndo,
+                  padding: const EdgeInsets.all(24.0),
+                  cardBuilder: (context, index) => cards[index],
+                  isVerticalSwipingEnabled: false,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

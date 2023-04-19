@@ -17,29 +17,37 @@ class ProfilWidget extends ConsumerWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: coulBlack,
         appBar: appBarReception(context),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            profilUser(ref, modif, edit),
-            modif == ModifMyProfil.MODIF || edit == EditMyPasswordProfil.EDIT
-                ? modifUser(context, modif)
-                : Container(),
-            tabBarEventSwipe(),
-            const SizedBox(
-              height: 15,
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  listEvenementLike(),
-                  listSwipeLike(),
-                ],
+        body: DecoratedBox(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("./assets/pictures/real_background.png"),
+                fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
               ),
-            )
-          ],
+              profilUser(ref, modif, edit),
+              modif == ModifMyProfil.MODIF || edit == EditMyPasswordProfil.EDIT
+                  ? modifUser(context, modif)
+                  : Container(),
+              tabBarEventSwipe(),
+              const SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    listEvenementLike(),
+                    listSwipeLike(),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -12,26 +12,34 @@ class SettingWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeModeApp theme = ref.watch(themeModeProviderState);
     return Scaffold(
+      backgroundColor: coulBlack,
       appBar: appBarReception(context),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-            child: const Text(
-              "Paramètres : ",
-              style: TextStyle(fontSize: 20, fontFamily: fontRubikMedium),
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("./assets/pictures/real_background.png"),
+              fit: BoxFit.cover),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+              child: const Text(
+                "Paramètres : ",
+                style: TextStyle(fontSize: 20, fontFamily: fontRubikMedium),
+              ),
             ),
-          ),
-          darkMode(ref, theme),
-          contactSupport(context),
-          cgu(),
-          btnDeconnect(),
-          const SizedBox(
-            height: 10,
-          ),
-          btnSuppCompte(),
-        ],
+            darkMode(ref, theme),
+            contactSupport(context),
+            cgu(),
+            btnDeconnect(),
+            const SizedBox(
+              height: 10,
+            ),
+            btnSuppCompte(),
+          ],
+        ),
       ),
     );
   }
