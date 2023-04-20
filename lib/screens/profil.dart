@@ -13,6 +13,9 @@ class ProfilWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ModifMyProfil modif = ref.watch(modifMyProfilProvider);
     EditMyPasswordProfil edit = ref.watch(editMyPasswordProfilProvider);
+    TypeProfil profil = ref.watch(typeProfilStateProvider);
+    TypeFollow follow = ref.watch(typeFollowStateProvider);
+    OptionFollower option = ref.watch(optionFollowerStateProvider);
 
     return DefaultTabController(
       length: 2,
@@ -30,10 +33,12 @@ class ProfilWidget extends ConsumerWidget {
               const SizedBox(
                 height: 10,
               ),
-              profilUser(ref, modif, edit),
+              profilUser(ref, modif, edit, profil, follow, option),
               modif == ModifMyProfil.MODIF || edit == EditMyPasswordProfil.EDIT
                   ? modifUser(context, modif)
-                  : Container(),
+                  : option == OptionFollower.OPTION
+                      ? optionFollower(context, option, follow)
+                      : Container(),
               tabBarEventSwipe(),
               const SizedBox(
                 height: 15,
@@ -41,8 +46,8 @@ class ProfilWidget extends ConsumerWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    listEvenementLike(),
-                    listSwipeLike(),
+                    listEvenementLike(follow),
+                    listSwipeLike(follow),
                   ],
                 ),
               )
@@ -63,14 +68,18 @@ Widget tabBarEventSwipe() {
           children: const [
             Icon(
               Icons.bookmark_add,
-              color: coulBlack,
+              color: coulGreyGrey,
             ),
             SizedBox(
               width: 5,
             ),
             Text(
               "Evenements",
-              style: TextStyle(color: coulBlack),
+              style: TextStyle(
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+                color: coulGreyGrey,
+              ),
             ),
           ],
         ),
@@ -81,19 +90,144 @@ Widget tabBarEventSwipe() {
           children: const [
             Icon(
               Entypo.switch_icon,
-              color: coulBlack,
+              color: coulGreyGrey,
             ),
             SizedBox(
               width: 5,
             ),
             Text(
               "Swipe",
-              style: TextStyle(color: coulBlack),
+              style: TextStyle(
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+                color: coulGreyGrey,
+              ),
             ),
           ],
         ),
       )
     ],
+  );
+}
+
+Widget optionFollower(
+    BuildContext context, OptionFollower option, TypeFollow follow) {
+  return Container(
+    margin: const EdgeInsets.only(left: 15, right: 15),
+    child: Column(
+      children: [
+        follow == TypeFollow.FOLLOW
+            ? ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<OutlinedBorder?>(
+                      RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: coulCiel,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(8))),
+                  backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
+                  minimumSize: MaterialStateProperty.all<Size?>(
+                    const Size(500.0, 40.0),
+                  ),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+                    const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+                  ),
+                ),
+                child: const Text(
+                  "Ne plus suivre",
+                  style: TextStyle(
+                    color: coulBlack,
+                    fontFamily: fontHindMaduraiMedium,
+                    fontSize: 16,
+                  ),
+                ),
+              )
+            : Container(),
+        ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<OutlinedBorder?>(
+                RoundedRectangleBorder(
+                    side: const BorderSide(
+                      color: coulCiel,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(8))),
+            backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
+            minimumSize: MaterialStateProperty.all<Size?>(
+              const Size(500.0, 40.0),
+            ),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+              const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+            ),
+          ),
+          child: const Text(
+            "Masquer l'utilisateur",
+            style: TextStyle(
+              color: coulBlack,
+              fontFamily: fontHindMaduraiMedium,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<OutlinedBorder?>(
+                RoundedRectangleBorder(
+                    side: const BorderSide(
+                      color: coulCiel,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(8))),
+            backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
+            minimumSize: MaterialStateProperty.all<Size?>(
+              const Size(500.0, 40.0),
+            ),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+              const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+            ),
+          ),
+          child: const Text(
+            "Signaler l'utilisateur",
+            style: TextStyle(
+              color: coulBlack,
+              fontFamily: fontHindMaduraiMedium,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<OutlinedBorder?>(
+                RoundedRectangleBorder(
+                    side: const BorderSide(
+                      color: coulCiel,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(8))),
+            backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
+            minimumSize: MaterialStateProperty.all<Size?>(
+              const Size(500.0, 40.0),
+            ),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+              const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
+            ),
+          ),
+          child: const Text(
+            "Bloquer l'utilisateur",
+            style: TextStyle(
+              color: coulBlack,
+              fontFamily: fontHindMaduraiMedium,
+              fontSize: 16,
+            ),
+          ),
+        )
+      ],
+    ),
   );
 }
 
@@ -106,7 +240,7 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
   }
   return Form(
     child: Container(
-      margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+      margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       child: Column(
         children: [
           const SizedBox(height: 18),
@@ -114,10 +248,12 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
               ? Row(
                   children: [
                     const CircleAvatar(
+                      backgroundColor: coulWhite,
                       radius: 30,
                       child: Icon(
                         Icons.person,
                         size: 50,
+                        color: coulCiel,
                       ),
                     ),
                     const SizedBox(
@@ -164,31 +300,31 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
                 ? textController[0]
                 : textController[3],
             style: const TextStyle(
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+                color: coulWhiteGrey),
             decoration: InputDecoration(
               border: const OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1,
-                  color: coulGrey,
+                  color: coulWhiteGrey,
                 ),
                 // borderRadius: BorderRadius.(),
               ),
               hintText: "PlaceHolder",
               hintStyle: const TextStyle(
-                fontFamily: fontHindMaduraiMedium,
-                fontSize: 16,
-              ),
+                  fontFamily: fontHindMaduraiMedium,
+                  fontSize: 16,
+                  color: coulWhiteGrey),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1,
-                  color: coulGrey,
+                  color: coulWhiteGrey,
                 ),
                 // borderRadius: BorderRadius.circular(30.0),
               ),
               labelStyle: const TextStyle(
-                color: coulGrey,
+                color: coulWhiteGrey,
                 fontFamily: fontHindMaduraiMedium,
                 fontSize: 16,
               ),
@@ -217,31 +353,31 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
                 ? textController[1]
                 : textController[4],
             style: const TextStyle(
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+                color: coulWhiteGrey),
             decoration: InputDecoration(
               border: const OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1,
-                  color: coulGrey,
+                  color: coulWhiteGrey,
                 ),
                 // borderRadius: BorderRadius.(),
               ),
               hintText: "PlaceHolder",
               hintStyle: const TextStyle(
-                fontFamily: fontHindMaduraiMedium,
-                fontSize: 16,
-              ),
+                  fontFamily: fontHindMaduraiMedium,
+                  fontSize: 16,
+                  color: coulWhiteGrey),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1,
-                  color: coulGrey,
+                  color: coulWhiteGrey,
                 ),
                 // borderRadius: BorderRadius.circular(30.0),
               ),
               labelStyle: const TextStyle(
-                color: coulGrey,
+                color: coulWhiteGrey,
                 fontFamily: fontHindMaduraiMedium,
                 fontSize: 16,
               ),
@@ -267,31 +403,31 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
                 ? textController[2]
                 : textController[5],
             style: const TextStyle(
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+                color: coulWhiteGrey),
             decoration: InputDecoration(
               border: const OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1,
-                  color: coulGrey,
+                  color: coulWhiteGrey,
                 ),
                 // borderRadius: BorderRadius.(),
               ),
               hintText: "PlaceHolder",
               hintStyle: const TextStyle(
-                fontFamily: fontHindMaduraiMedium,
-                fontSize: 16,
-              ),
+                  fontFamily: fontHindMaduraiMedium,
+                  fontSize: 16,
+                  color: coulWhiteGrey),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1,
-                  color: coulGrey,
+                  color: coulWhiteGrey,
                 ),
                 // borderRadius: BorderRadius.circular(30.0),
               ),
               labelStyle: const TextStyle(
-                color: coulGrey,
+                color: coulWhiteGrey,
                 fontFamily: fontHindMaduraiMedium,
                 fontSize: 16,
               ),
@@ -336,26 +472,32 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
   );
 }
 
-Widget profilUser(
-    WidgetRef ref, ModifMyProfil modif, EditMyPasswordProfil edit) {
+Widget profilUser(WidgetRef ref, ModifMyProfil modif, EditMyPasswordProfil edit,
+    TypeProfil profil, TypeFollow follow, OptionFollower option) {
   return ListTile(
     leading: const CircleAvatar(
+      backgroundColor: coulWhite,
       radius: 30,
       child: Icon(
         Icons.person,
         size: 50,
+        color: coulCiel,
       ),
     ),
     title: const Text(
       "JohnDoe_",
-      style: TextStyle(fontSize: 16, fontFamily: fontRubikRegular),
+      style: TextStyle(
+          fontSize: 16, fontFamily: fontRubikRegular, color: coulWhite),
     ),
     subtitle: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
           "John Doe",
-          style: TextStyle(fontSize: 14, fontFamily: fontHindMaduraiRegular),
+          style: TextStyle(
+              fontSize: 14,
+              fontFamily: fontHindMaduraiRegular,
+              color: coulWhite),
         ),
         GestureDetector(
           onTap: () {
@@ -365,8 +507,10 @@ Widget profilUser(
             children: const [
               Text(
                 "108",
-                style:
-                    TextStyle(fontSize: 14, fontFamily: fontHindMaduraiRegular),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: fontHindMaduraiRegular,
+                    color: coulWhite),
               ),
               SizedBox(
                 width: 8,
@@ -374,11 +518,14 @@ Widget profilUser(
               Icon(
                 Icons.person,
                 size: 14,
+                color: coulWhite,
               ),
               Text(
                 "Amis",
-                style:
-                    TextStyle(fontSize: 14, fontFamily: fontHindMaduraiRegular),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: fontHindMaduraiRegular,
+                    color: coulWhite),
               ),
             ],
           ),
@@ -402,16 +549,32 @@ Widget profilUser(
                     ),
                   ),
                   onPressed: () {
-                    ref
-                        .watch(modifMyProfilProvider.notifier)
-                        .update((state) => ModifMyProfil.MODIF);
-                    ref
-                        .watch(editMyPasswordProfilProvider.notifier)
-                        .update((state) => EditMyPasswordProfil.UNEDIT);
+                    if (profil == TypeProfil.MYPROFIL) {
+                      ref
+                          .watch(modifMyProfilProvider.notifier)
+                          .update((state) => ModifMyProfil.MODIF);
+                      ref
+                          .watch(editMyPasswordProfilProvider.notifier)
+                          .update((state) => EditMyPasswordProfil.UNEDIT);
+                    } else {
+                      if (follow == TypeFollow.FOLLOW) {
+                        ref
+                            .watch(typeFollowStateProvider.notifier)
+                            .update((state) => TypeFollow.UNFOLLOW);
+                      } else {
+                        ref
+                            .watch(typeFollowStateProvider.notifier)
+                            .update((state) => TypeFollow.FOLLOW);
+                      }
+                    }
                   },
-                  child: const Text(
-                    "Modifier",
-                    style: TextStyle(
+                  child: Text(
+                    profil == TypeProfil.MYPROFIL
+                        ? "Modifier"
+                        : follow == TypeFollow.UNFOLLOW
+                            ? "Suivre"
+                            : "Suivi(e)",
+                    style: const TextStyle(
                         fontFamily: fontHindMaduraiMedium,
                         fontSize: 16,
                         color: coulBlack),
@@ -421,16 +584,32 @@ Widget profilUser(
           edit == EditMyPasswordProfil.UNEDIT
               ? IconButton(
                   onPressed: () {
-                    ref
-                        .watch(editMyPasswordProfilProvider.notifier)
-                        .update((state) => EditMyPasswordProfil.EDIT);
-                    ref
-                        .watch(modifMyProfilProvider.notifier)
-                        .update((state) => ModifMyProfil.UNMODIF);
+                    if (profil == TypeProfil.MYPROFIL) {
+                      ref
+                          .watch(editMyPasswordProfilProvider.notifier)
+                          .update((state) => EditMyPasswordProfil.EDIT);
+                      ref
+                          .watch(modifMyProfilProvider.notifier)
+                          .update((state) => ModifMyProfil.UNMODIF);
+                    } else {
+                      if (option == OptionFollower.OPTION) {
+                        ref
+                            .watch(optionFollowerStateProvider.notifier)
+                            .update((state) => OptionFollower.UNOPTION);
+                      } else {
+                        ref
+                            .watch(optionFollowerStateProvider.notifier)
+                            .update((state) => OptionFollower.OPTION);
+                      }
+                    }
                   },
-                  icon: const Icon(
-                    Typicons.cog_outline,
-                    color: coulBlack,
+                  icon: Icon(
+                    profil == TypeProfil.MYPROFIL
+                        ? Typicons.cog_outline
+                        : option == OptionFollower.UNOPTION
+                            ? Icons.more_vert
+                            : Icons.close,
+                    color: coulWhite,
                   ),
                 )
               : Container(),
@@ -448,7 +627,10 @@ Widget profilUser(
                           .update((state) => EditMyPasswordProfil.UNEDIT);
                     }
                   },
-                  icon: const Icon(Icons.close),
+                  icon: const Icon(
+                    Icons.close,
+                    color: coulWhite,
+                  ),
                 )
               : Container(),
         ],
@@ -457,156 +639,186 @@ Widget profilUser(
   );
 }
 
-Widget listEvenementLike() {
-  return ListView.separated(
-      padding: const EdgeInsets.all(5),
-      itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-          height: 112,
-          decoration: BoxDecoration(
-            border: Border.all(
-                width: 1.0, color: coulBlack, style: BorderStyle.solid),
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-          ),
-          child: ListTile(
-            onTap: () {},
-            leading: Expanded(
-              child: Container(
-                margin: EdgeInsets.fromLTRB(24, 0, 0, 0),
-                padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      "assets/pictures/test.jpeg",
-                      width: 40,
-                      height: 40,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      "Event name",
-                      style: TextStyle(
-                        fontFamily: fontHindMaduraiRegular,
-                        fontSize: 16,
+Widget listEvenementLike(TypeFollow follow) {
+  if (follow == TypeFollow.FOLLOW) {
+    return ListView.separated(
+        padding: const EdgeInsets.all(5),
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            height: 112,
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                image: AssetImage("assets/pictures/bar_chat.png"),
+                fit: BoxFit.cover,
+              ),
+              border: Border.all(
+                  width: 1.0, color: coulBlack, style: BorderStyle.solid),
+              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            ),
+            child: ListTile(
+              onTap: () {},
+              leading: Expanded(
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(24, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        "assets/pictures/test.jpeg",
+                        width: 40,
+                        height: 40,
                       ),
-                    ),
-                    const Text(
-                      "Description",
-                      style: TextStyle(
-                        fontFamily: fontHindMaduraiRegular,
-                        fontSize: 14,
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ],
+                      const Text(
+                        "Event name",
+                        style: TextStyle(
+                            fontFamily: fontHindMaduraiRegular,
+                            fontSize: 16,
+                            color: coulWhite),
+                      ),
+                      const Text(
+                        "Description",
+                        style: TextStyle(
+                            fontFamily: fontHindMaduraiRegular,
+                            fontSize: 14,
+                            color: coulWhite),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // title: const Text(
+              //   "Event name",
+              //   style: TextStyle(
+              //     fontFamily: fontHindMaduraiRegular,
+              //     fontSize: 16,
+              //   ),
+              // ),
+              // subtitle: const Text(
+              //   "Description",
+              //   style: TextStyle(
+              //     fontFamily: fontHindMaduraiRegular,
+              //     fontSize: 12,
+              //   ),
+              // ),
+              trailing: Container(
+                margin: const EdgeInsets.fromLTRB(0, 35, 0, 0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.bookmark_add,
+                    size: 30,
+                    color: coulYellow,
+                  ),
                 ),
               ),
             ),
-            // title: const Text(
-            //   "Event name",
-            //   style: TextStyle(
-            //     fontFamily: fontHindMaduraiRegular,
-            //     fontSize: 16,
-            //   ),
-            // ),
-            // subtitle: const Text(
-            //   "Description",
-            //   style: TextStyle(
-            //     fontFamily: fontHindMaduraiRegular,
-            //     fontSize: 12,
-            //   ),
-            // ),
-            trailing: Container(
-              margin: const EdgeInsets.fromLTRB(0, 35, 0, 0),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(FontAwesome5.bookmark),
-              ),
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return const SizedBox(
-          height: 15,
-        );
-      },
-      itemCount: 10);
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const SizedBox(
+            height: 15,
+          );
+        },
+        itemCount: 10);
+  } else {
+    return Container(
+      margin: const EdgeInsets.only(left: 15, right: 15),
+      child: const Text(
+        'Veuillez suivre cet utilisateur pour voir ses évènements enregistrés',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontFamily: fontHindMaduraiBold, fontSize: 16, color: coulWhite),
+      ),
+    );
+  }
 }
 
-Widget listSwipeLike() {
-  return ListView.separated(
-      padding: const EdgeInsets.all(5),
-      itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-          height: 112,
-          decoration: BoxDecoration(
-            border: Border.all(
-                width: 1.0, color: coulBlack, style: BorderStyle.solid),
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-          ),
-          child: ListTile(
-            onTap: () {},
-            leading: Expanded(
-              child: Container(
-                margin: EdgeInsets.fromLTRB(24, 0, 0, 0),
-                padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      "assets/pictures/test.jpeg",
-                      width: 40,
-                      height: 40,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      "Lieu",
-                      style: TextStyle(
-                        fontFamily: fontHindMaduraiRegular,
-                        fontSize: 16,
+Widget listSwipeLike(TypeFollow follow) {
+  if (follow == TypeFollow.FOLLOW) {
+    return ListView.separated(
+        padding: const EdgeInsets.all(5),
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            height: 112,
+            decoration: BoxDecoration(
+              border: Border.all(
+                  width: 1.0, color: coulBlack, style: BorderStyle.solid),
+              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            ),
+            child: ListTile(
+              onTap: () {},
+              leading: Expanded(
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(24, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        "assets/pictures/test.jpeg",
+                        width: 40,
+                        height: 40,
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        "Lieu",
+                        style: TextStyle(
+                            fontFamily: fontHindMaduraiRegular,
+                            fontSize: 16,
+                            color: coulWhite),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // title: const Text(
+              //   "Event name",
+              //   style: TextStyle(
+              //     fontFamily: fontHindMaduraiRegular,
+              //     fontSize: 16,
+              //   ),
+              // ),
+              // subtitle: const Text(
+              //   "Description",
+              //   style: TextStyle(
+              //     fontFamily: fontHindMaduraiRegular,
+              //     fontSize: 12,
+              //   ),
+              // ),
+              trailing: Container(
+                margin: const EdgeInsets.fromLTRB(0, 27, 0, 0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    size: 40,
+                    color: coulWhite,
+                  ),
                 ),
               ),
             ),
-            // title: const Text(
-            //   "Event name",
-            //   style: TextStyle(
-            //     fontFamily: fontHindMaduraiRegular,
-            //     fontSize: 16,
-            //   ),
-            // ),
-            // subtitle: const Text(
-            //   "Description",
-            //   style: TextStyle(
-            //     fontFamily: fontHindMaduraiRegular,
-            //     fontSize: 12,
-            //   ),
-            // ),
-            trailing: Container(
-              margin: const EdgeInsets.fromLTRB(0, 27, 0, 0),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.delete_outline,
-                  size: 40,
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return const SizedBox(
-          height: 10,
-        );
-      },
-      itemCount: 10);
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const SizedBox(
+            height: 10,
+          );
+        },
+        itemCount: 10);
+  } else {
+    return const Text(
+      'Veuillez suivre cet utilisateur pour voir ses swipe enregistrés',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          fontFamily: fontHindMaduraiBold, fontSize: 16, color: coulWhite),
+    );
+  }
 }

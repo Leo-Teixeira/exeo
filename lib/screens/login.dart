@@ -46,7 +46,8 @@ class LoginPage extends ConsumerWidget {
             children: [
               const Text(
                 "Se Connecter",
-                style: TextStyle(fontFamily: fontRubikBold, fontSize: 28),
+                style: TextStyle(
+                    fontFamily: fontRubikBold, fontSize: 28, color: coulWhite),
               ),
               const SizedBox(
                 height: 44,
@@ -81,24 +82,24 @@ class LoginPage extends ConsumerWidget {
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.(),
                             ),
                             hintText: "PlaceHolder",
                             hintStyle: TextStyle(
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
+                                fontFamily: fontHindMaduraiMedium,
+                                fontSize: 16,
+                                color: coulWhiteGrey),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             labelStyle: TextStyle(
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
@@ -133,22 +134,22 @@ class LoginPage extends ConsumerWidget {
                               },
                               controller: passwordController,
                               style: const TextStyle(
-                                fontFamily: fontHindMaduraiMedium,
-                                fontSize: 16,
-                              ),
+                                  fontFamily: fontHindMaduraiMedium,
+                                  fontSize: 16,
+                                  color: coulWhiteGrey),
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     width: 1,
-                                    color: coulGrey,
+                                    color: coulWhiteGrey,
                                   ),
                                   // borderRadius: BorderRadius.circular(30.0),
                                 ),
                                 hintText: "PlaceHolder",
                                 hintStyle: const TextStyle(
-                                  fontFamily: fontHindMaduraiMedium,
-                                  fontSize: 16,
-                                ),
+                                    fontFamily: fontHindMaduraiMedium,
+                                    fontSize: 16,
+                                    color: coulWhiteGrey),
                                 suffixIcon: IconButton(
                                     onPressed: () {
                                       if (pwdShow == ModePassword.SHOW) {
@@ -169,17 +170,17 @@ class LoginPage extends ConsumerWidget {
                                       pwdShow == ModePassword.SHOW
                                           ? Icons.remove_red_eye_outlined
                                           : FontAwesome5.eye_slash,
-                                      color: coulBlack,
+                                      color: coulWhiteGrey,
                                     )),
                                 focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     width: 1,
-                                    color: coulGrey,
+                                    color: coulWhiteGrey,
                                   ),
                                   // borderRadius: BorderRadius.circular(30.0),
                                 ),
                                 labelStyle: const TextStyle(
-                                  color: coulGrey,
+                                  color: coulWhiteGrey,
                                   fontFamily: fontHindMaduraiMedium,
                                   fontSize: 16,
                                 ),
@@ -199,7 +200,7 @@ class LoginPage extends ConsumerWidget {
                               child: const Text(
                                 "Mot de passe oublié ?",
                                 style: TextStyle(
-                                    color: coulBlack,
+                                    color: coulWhite,
                                     decoration: TextDecoration.underline,
                                     fontFamily: fontHindMaduraiRegular,
                                     fontSize: 12),
@@ -247,7 +248,7 @@ class LoginPage extends ConsumerWidget {
                           const Text(
                             "Vous n'avez pas de compte ?",
                             style: TextStyle(
-                              color: coulBlack,
+                              color: coulWhite,
                               fontFamily: fontHindMaduraiRegular,
                               fontSize: 12,
                             ),

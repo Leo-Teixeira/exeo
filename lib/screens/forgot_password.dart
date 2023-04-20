@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
+// ignore: must_be_immutable
 class ForgotPasswordPage extends ConsumerWidget {
   final GlobalKey<FormState> _loginKey = GlobalKey();
   FocusNode mail = FocusNode();
@@ -31,7 +32,7 @@ class ForgotPasswordPage extends ConsumerWidget {
             children: [
               const Text(
                 "Mot de passe oublié",
-                style: TextStyle(fontFamily: fontRubikBold, fontSize: 28),
+                style: TextStyle(fontFamily: fontRubikBold, fontSize: 28, color: coulWhite),
               ),
               const SizedBox(
                 height: 44,
@@ -60,12 +61,13 @@ class ForgotPasswordPage extends ConsumerWidget {
                         style: const TextStyle(
                           fontFamily: fontHindMaduraiMedium,
                           fontSize: 16,
+                          color: coulWhiteGrey
                         ),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                             ),
                             // borderRadius: BorderRadius.(),
                           ),
@@ -73,16 +75,17 @@ class ForgotPasswordPage extends ConsumerWidget {
                           hintStyle: TextStyle(
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
+                            color: coulWhiteGrey
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                             ),
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
                           labelStyle: TextStyle(
-                            color: coulGrey,
+                            color: coulWhiteGrey,
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
                           ),
@@ -112,12 +115,13 @@ class ForgotPasswordPage extends ConsumerWidget {
                         style: const TextStyle(
                           fontFamily: fontHindMaduraiMedium,
                           fontSize: 16,
+                          color: coulWhiteGrey
                         ),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                             ),
                             // borderRadius: BorderRadius.(),
                           ),
@@ -125,16 +129,17 @@ class ForgotPasswordPage extends ConsumerWidget {
                           hintStyle: TextStyle(
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
+                            color: coulWhiteGrey
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                             ),
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
                           labelStyle: TextStyle(
-                            color: coulGrey,
+                            color: coulWhiteGrey,
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
                           ),
@@ -169,7 +174,7 @@ class ForgotPasswordPage extends ConsumerWidget {
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                             ),
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
@@ -177,16 +182,17 @@ class ForgotPasswordPage extends ConsumerWidget {
                           hintStyle: TextStyle(
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
+                            color: coulWhiteGrey
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 1,
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                             ),
                             // borderRadius: BorderRadius.circular(30.0),
                           ),
                           labelStyle: TextStyle(
-                            color: coulGrey,
+                            color: coulWhiteGrey,
                             fontFamily: fontHindMaduraiMedium,
                             fontSize: 16,
                           ),

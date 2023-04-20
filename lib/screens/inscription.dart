@@ -41,7 +41,10 @@ class InscriptionPage extends ConsumerWidget {
               children: [
                 const Text(
                   "S'enregistrer",
-                  style: TextStyle(fontFamily: fontRubikBold, fontSize: 28),
+                  style: TextStyle(
+                      fontFamily: fontRubikBold,
+                      fontSize: 28,
+                      color: coulWhite),
                 ),
                 const SizedBox(
                   height: 44,
@@ -67,31 +70,31 @@ class InscriptionPage extends ConsumerWidget {
                           },
                           controller: lastnameController,
                           style: const TextStyle(
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                              color: coulWhiteGrey),
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.(),
                             ),
                             hintText: "PlaceHolder",
                             hintStyle: TextStyle(
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
+                                fontFamily: fontHindMaduraiMedium,
+                                fontSize: 16,
+                                color: coulWhiteGrey),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             labelStyle: TextStyle(
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
@@ -119,31 +122,31 @@ class InscriptionPage extends ConsumerWidget {
                           },
                           controller: firstnameController,
                           style: const TextStyle(
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                              color: coulWhiteGrey),
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.(),
                             ),
                             hintText: "PlaceHolder",
                             hintStyle: TextStyle(
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
+                                fontFamily: fontHindMaduraiMedium,
+                                fontSize: 16,
+                                color: coulWhiteGrey),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             labelStyle: TextStyle(
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
@@ -172,14 +175,14 @@ class InscriptionPage extends ConsumerWidget {
                           },
                           controller: birthdateController,
                           style: const TextStyle(
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                              color: coulWhiteGrey),
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.(),
                             ),
@@ -190,17 +193,17 @@ class InscriptionPage extends ConsumerWidget {
                             ),
                             suffixIcon: Icon(
                               FontAwesome5.calendar_alt,
-                              color: coulBlack,
+                              color: coulWhiteGrey,
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             labelStyle: TextStyle(
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
@@ -229,31 +232,31 @@ class InscriptionPage extends ConsumerWidget {
                           },
                           controller: mailController,
                           style: const TextStyle(
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                              color: coulWhiteGrey),
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.(),
                             ),
                             hintText: "PlaceHolder",
                             hintStyle: TextStyle(
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
+                                fontFamily: fontHindMaduraiMedium,
+                                fontSize: 16,
+                                color: coulWhiteGrey),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             labelStyle: TextStyle(
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
@@ -283,22 +286,22 @@ class InscriptionPage extends ConsumerWidget {
                           },
                           controller: passwordController,
                           style: const TextStyle(
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                              color: coulWhiteGrey),
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             hintText: "PlaceHolder",
                             hintStyle: const TextStyle(
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
+                                fontFamily: fontHindMaduraiMedium,
+                                fontSize: 16,
+                                color: coulWhiteGrey),
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   if (pwdShow == ModePassword.SHOW) {
@@ -317,17 +320,17 @@ class InscriptionPage extends ConsumerWidget {
                                   pwdShow == ModePassword.SHOW
                                       ? Icons.remove_red_eye_outlined
                                       : FontAwesome5.eye_slash,
-                                  color: coulBlack,
+                                  color: coulWhiteGrey,
                                 )),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             labelStyle: const TextStyle(
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
@@ -356,22 +359,22 @@ class InscriptionPage extends ConsumerWidget {
                           },
                           controller: confirmController,
                           style: const TextStyle(
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                              color: coulWhiteGrey),
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             hintText: "PlaceHolder",
                             hintStyle: const TextStyle(
-                              fontFamily: fontHindMaduraiMedium,
-                              fontSize: 16,
-                            ),
+                                fontFamily: fontHindMaduraiMedium,
+                                fontSize: 16,
+                                color: coulWhiteGrey),
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   if (pwdShow == ModePassword.SHOW) {
@@ -390,17 +393,17 @@ class InscriptionPage extends ConsumerWidget {
                                   pwdShow == ModePassword.SHOW
                                       ? Icons.remove_red_eye_outlined
                                       : FontAwesome5.eye_slash,
-                                  color: coulBlack,
+                                  color: coulWhiteGrey,
                                 )),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 1,
-                                color: coulGrey,
+                                color: coulWhiteGrey,
                               ),
                               // borderRadius: BorderRadius.circular(30.0),
                             ),
                             labelStyle: const TextStyle(
-                              color: coulGrey,
+                              color: coulWhiteGrey,
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
                             ),
@@ -443,9 +446,9 @@ class InscriptionPage extends ConsumerWidget {
                           const Text(
                             "Vous avez déja un compte ?",
                             style: TextStyle(
-                              fontFamily: fontHindMaduraiRegular,
-                              fontSize: 12,
-                            ),
+                                fontFamily: fontHindMaduraiRegular,
+                                fontSize: 12,
+                                color: coulWhite),
                           ),
                           TextButton(
                             onPressed: () {

@@ -11,10 +11,12 @@ const Color coulPurple = Color(0xFF7C2ED9);
 const Color coulYellow = Color(0xFFFFB74C);
 const Color coulOrange = Color(0xFFFF774C);
 const Color coulRed = Color(0xFFF04F1C);
+const Color coulGreen = Color(0xFF03CC17);
 
 const Color coulGrey = Color(0xFF232323);
 const Color coulBlack = Color(0xFF141414);
-const Color coulWhiteGrey = Color(0xFFFEFEFE);
+const Color coulWhiteGrey = Color(0xFFACACAC);
+const Color coulGreyGrey = Color(0xFFFEFEFE);
 const Color coulWhite = Color(0xFFF5F5F5);
 
 const String fontRubikLight = 'RubikLight';

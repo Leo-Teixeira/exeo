@@ -33,3 +33,54 @@ final myPasswordProfilProvider = Provider<EditMyPasswordProfil>((ref) {
       return EditMyPasswordProfil.UNEDIT;
   }
 });
+
+enum TypeProfil { MYPROFIL, OTHERPROFIL }
+
+final typeProfilStateProvider =
+    StateProvider<TypeProfil>((ref) => TypeProfil.OTHERPROFIL);
+
+final typeProfilProvider = Provider<TypeProfil>((ref) {
+  final sortType = ref.watch(typeProfilStateProvider);
+
+  switch (sortType) {
+    case TypeProfil.MYPROFIL:
+      return TypeProfil.MYPROFIL;
+
+    case TypeProfil.OTHERPROFIL:
+      return TypeProfil.OTHERPROFIL;
+  }
+});
+
+enum TypeFollow { FOLLOW, UNFOLLOW }
+
+final typeFollowStateProvider =
+    StateProvider<TypeFollow>((ref) => TypeFollow.UNFOLLOW);
+
+final typeFollowProvider = Provider<TypeFollow>((ref) {
+  final sortType = ref.watch(typeFollowStateProvider);
+
+  switch (sortType) {
+    case TypeFollow.FOLLOW:
+      return TypeFollow.FOLLOW;
+
+    case TypeFollow.UNFOLLOW:
+      return TypeFollow.UNFOLLOW;
+  }
+});
+
+enum OptionFollower { OPTION, UNOPTION }
+
+final optionFollowerStateProvider =
+    StateProvider<OptionFollower>((ref) => OptionFollower.UNOPTION);
+
+final optionFollowerProvider = Provider<OptionFollower>((ref) {
+  final sortType = ref.watch(optionFollowerStateProvider);
+
+  switch (sortType) {
+    case OptionFollower.OPTION:
+      return OptionFollower.OPTION;
+
+    case OptionFollower.UNOPTION:
+      return OptionFollower.UNOPTION;
+  }
+});

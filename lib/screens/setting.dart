@@ -1,8 +1,8 @@
 import 'package:exeo/provider/settings_provider.dart';
+import 'package:exeo/screens/login.dart';
 import 'package:exeo/screens/support.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingWidget extends ConsumerWidget {
@@ -24,16 +24,47 @@ class SettingWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-              child: const Text(
-                "Paramètres : ",
-                style: TextStyle(fontSize: 20, fontFamily: fontRubikMedium),
-              ),
+              margin: const EdgeInsets.only(left: 15, right: 15),
+              child: Column(children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: coulWhite,
+                      ),
+                    ),
+                    const Center(
+                      child: Text(
+                        "Paramètres",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: fontRubikMedium,
+                            color: coulWhite),
+                      ),
+                    ),
+                    //! centrer le texte
+                  ],
+                ),
+                Container(
+                  height: 1,
+                  color: coulWhite,
+                  child: const Divider(
+                    color: coulWhite,
+                    height: 0,
+                  ),
+                ),
+              ]),
             ),
             darkMode(ref, theme),
             contactSupport(context),
             cgu(),
-            btnDeconnect(),
+            btnDeconnect(context),
             const SizedBox(
               height: 10,
             ),
@@ -47,15 +78,24 @@ class SettingWidget extends ConsumerWidget {
 
 Widget darkMode(WidgetRef ref, ThemeModeApp theme) {
   return ListTile(
-    leading: const Icon(Icons.dark_mode_outlined),
+    leading: const Icon(
+      Icons.dark_mode_outlined,
+      color: coulWhite,
+    ),
     // ! changer le text selon si darkMode actif ou non
     title: theme == ThemeModeApp.LIGHTMODE
         ? const Text(
             "Activer le dark mode",
-            style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16),
+            style: TextStyle(
+                fontFamily: fontHindMaduraiLight,
+                fontSize: 16,
+                color: coulWhite),
           )
         : const Text('Désactiver le dark mode',
-            style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16)),
+            style: TextStyle(
+                fontFamily: fontHindMaduraiLight,
+                fontSize: 16,
+                color: coulWhite)),
     trailing: Switch(
       onChanged: (value) {
         if (value == true) {
@@ -81,10 +121,12 @@ Widget contactSupport(BuildContext context) {
   return ListTile(
     leading: const Icon(
       Icons.help,
+      color: coulWhite,
     ),
     title: const Text(
       "Contacter le support",
-      style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16),
+      style: TextStyle(
+          fontFamily: fontHindMaduraiLight, fontSize: 16, color: coulWhite),
     ),
     trailing: IconButton(
       onPressed: () {
@@ -94,30 +136,47 @@ Widget contactSupport(BuildContext context) {
           ),
         );
       },
-      icon: const Icon(Icons.arrow_forward_ios),
+      icon: const Icon(
+        Icons.arrow_forward_ios,
+        color: coulWhite,
+      ),
     ),
   );
 }
 
 Widget cgu() {
   return ListTile(
-    leading: const Icon(Icons.info_outline),
+    leading: const Icon(
+      Icons.info_outline,
+      color: coulWhite,
+    ),
     title: const Text(
       "Conditions Générales d'Utilisation",
-      style: TextStyle(fontFamily: fontHindMaduraiLight, fontSize: 16),
+      style: TextStyle(
+          fontFamily: fontHindMaduraiLight, fontSize: 16, color: coulWhite),
     ),
     trailing: Container(
       margin: const EdgeInsets.fromLTRB(0, 0, 12, 0),
-      child: const Icon(Icons.arrow_forward_ios),
+      child: const Icon(
+        Icons.arrow_forward_ios,
+        color: coulWhite,
+      ),
     ),
   );
 }
 
-Widget btnDeconnect() {
+Widget btnDeconnect(BuildContext context) {
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pop();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const LoginWidget(),
+          ),
+        );
+      },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color?>(coulCiel),
         minimumSize: MaterialStateProperty.all<Size?>(

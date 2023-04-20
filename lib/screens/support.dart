@@ -1,7 +1,7 @@
-import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:exeo/services/constant.dart';
 
 class SupportWidget extends ConsumerWidget {
   const SupportWidget({super.key});
@@ -28,9 +28,9 @@ class SupportWidget extends ConsumerWidget {
               titleSupport(context),
               Container(
                 height: 1,
-                color: coulBlack,
+                color: coulWhite,
                 child: const Divider(
-                  color: coulBlack,
+                  color: coulWhite,
                   height: 0,
                 ),
               ),
@@ -54,13 +54,17 @@ Widget titleSupport(BuildContext context) {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        icon: const Icon(Icons.arrow_back_ios),
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          color: coulWhite,
+        ),
       ),
       const Center(
         child: Text(
           "Support",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20, fontFamily: fontRubikMedium),
+          style: TextStyle(
+              fontSize: 20, fontFamily: fontRubikMedium, color: coulWhite),
         ),
       ),
       //! centrer le texte
@@ -79,7 +83,11 @@ Widget formSupport() {
       children: [
         const Text(
           "Sujet de votre demande : ",
-          style: TextStyle(fontSize: 16, fontFamily: fontHindMaduraiMedium),
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: fontHindMaduraiMedium,
+            color: coulWhite,
+          ),
         ),
         const SizedBox(
           height: 5,
@@ -93,7 +101,11 @@ Widget formSupport() {
           }).toList(),
           hint: const Text(
             "J'ai trouvé un bug",
-            style: TextStyle(fontFamily: fontHindMaduraiMedium, fontSize: 16),
+            style: TextStyle(
+              fontFamily: fontHindMaduraiMedium,
+              fontSize: 16,
+              color: coulWhiteGrey,
+            ),
           ),
           onChanged: (_) {},
           isExpanded: true,
@@ -103,7 +115,11 @@ Widget formSupport() {
         ),
         const Text(
           "Votre message : ",
-          style: TextStyle(fontSize: 16, fontFamily: fontHindMaduraiMedium),
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: fontHindMaduraiMedium,
+            color: coulWhite,
+          ),
         ),
         const SizedBox(
           height: 10,
@@ -126,24 +142,24 @@ Widget formSupport() {
             border: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
-                color: coulGrey,
+                color: coulWhiteGrey,
               ),
               // borderRadius: BorderRadius.circular(30.0),
             ),
             hintText: "PlaceHolder",
             hintStyle: TextStyle(
-              fontFamily: fontHindMaduraiMedium,
-              fontSize: 16,
-            ),
+                fontFamily: fontHindMaduraiMedium,
+                fontSize: 16,
+                color: coulWhiteGrey),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
-                color: coulGrey,
+                color: coulWhiteGrey,
               ),
               // borderRadius: BorderRadius.circular(30.0),
             ),
             labelStyle: TextStyle(
-              color: coulGrey,
+              color: coulWhiteGrey,
               fontFamily: fontHindMaduraiMedium,
               fontSize: 16,
             ),

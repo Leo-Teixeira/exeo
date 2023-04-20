@@ -36,7 +36,10 @@ class ReceptionPage extends ConsumerWidget {
                 margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                 child: const Text(
                   "Les évènements",
-                  style: TextStyle(fontSize: 28, fontFamily: fontRubikRegular),
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontFamily: fontRubikRegular,
+                      color: coulWhite),
                 ),
               ),
               for (int i = 0; i < 5; i++)
@@ -47,7 +50,12 @@ class ReceptionPage extends ConsumerWidget {
                     ),
                     Container(
                       height: 130,
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                       decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: AssetImage("assets/pictures/bar_chat.png"),
+                          fit: BoxFit.cover,
+                        ),
                         border: Border.all(
                             width: 1.0,
                             color: coulBlack,
@@ -68,8 +76,8 @@ class ReceptionPage extends ConsumerWidget {
                         },
                         leading: Expanded(
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(24, 0, 0, 0),
-                            padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                            margin: const EdgeInsets.fromLTRB(24, 0, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -84,16 +92,16 @@ class ReceptionPage extends ConsumerWidget {
                                 const Text(
                                   "Event name",
                                   style: TextStyle(
-                                    fontFamily: fontHindMaduraiRegular,
-                                    fontSize: 16,
-                                  ),
+                                      fontFamily: fontHindMaduraiRegular,
+                                      fontSize: 16,
+                                      color: coulWhite),
                                 ),
                                 const Text(
                                   "Description",
                                   style: TextStyle(
-                                    fontFamily: fontHindMaduraiRegular,
-                                    fontSize: 12,
-                                  ),
+                                      fontFamily: fontHindMaduraiRegular,
+                                      fontSize: 12,
+                                      color: coulWhite),
                                 ),
                               ],
                             ),
@@ -143,6 +151,7 @@ class ReceptionPage extends ConsumerWidget {
                                 ? const Icon(
                                     Icons.bookmark_add_outlined,
                                     size: 30,
+                                    color: coulWhite,
                                   )
                                 : const Icon(
                                     Icons.bookmark,
@@ -161,14 +170,25 @@ class ReceptionPage extends ConsumerWidget {
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(sizeWidth / 2.5, 0, 0, 0),
-                  child: const Text("Voir plus"),
+                  child: const Text(
+                    "Voir plus",
+                    style: TextStyle(
+                      fontFamily: fontHindMaduraiMedium,
+                      fontSize: 14,
+                      color: coulWhite,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                 child: const Text(
                   "Les Activités",
-                  style: TextStyle(fontSize: 28, fontFamily: fontRubikRegular),
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontFamily: fontRubikRegular,
+                      color: coulWhite),
                 ),
               ),
               for (int i = 0; i < 3; i++)
@@ -197,6 +217,7 @@ class ReceptionPage extends ConsumerWidget {
                                 height: 143,
                                 margin: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
+                                  color: coulBlack,
                                   border: Border.all(
                                       width: 1.0,
                                       color: coulBlack,
@@ -223,6 +244,7 @@ class ReceptionPage extends ConsumerWidget {
                                       child: Image.asset(
                                         "assets/pictures/test.jpeg",
                                         width: 100,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                     Container(
@@ -232,7 +254,8 @@ class ReceptionPage extends ConsumerWidget {
                                         "Title",
                                         style: TextStyle(
                                             fontFamily: fontHindMaduraiMedium,
-                                            fontSize: 16),
+                                            fontSize: 16,
+                                            color: coulWhite),
                                       ),
                                     ),
                                     Container(
@@ -242,7 +265,8 @@ class ReceptionPage extends ConsumerWidget {
                                         "Title",
                                         style: TextStyle(
                                             fontFamily: fontHindMaduraiMedium,
-                                            fontSize: 12),
+                                            fontSize: 12,
+                                            color: coulWhite),
                                       ),
                                     ),
                                   ],
@@ -258,7 +282,14 @@ class ReceptionPage extends ConsumerWidget {
                 onPressed: () {},
                 child: Container(
                   margin: EdgeInsets.fromLTRB(sizeWidth / 2.5, 0, 0, 0),
-                  child: const Text("Voir plus"),
+                  child: const Text(
+                    "Voir plus",
+                    style: TextStyle(
+                        fontFamily: fontHindMaduraiMedium,
+                        fontSize: 14,
+                        color: coulWhite,
+                        decoration: TextDecoration.underline),
+                  ),
                 ),
               ),
             ],

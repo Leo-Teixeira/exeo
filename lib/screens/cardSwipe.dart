@@ -1,3 +1,4 @@
+import 'package:exeo/provider/reception_provider.dart';
 import 'package:exeo/provider/swipe_provider.dart';
 import 'package:exeo/screens/more_info.dart';
 import 'package:exeo/services/constant.dart';
@@ -25,6 +26,9 @@ class SwipeCardWidget extends ConsumerWidget {
     }
     return GestureDetector(
       onTap: () {
+        ref
+            .watch(typeInfoStateProvider.notifier)
+            .update((state) => TypeInfo.LIEU);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => const MoreInfoWidget(),
@@ -35,7 +39,7 @@ class SwipeCardWidget extends ConsumerWidget {
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          color: Colors.white,
+          color: coulBlack,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -68,7 +72,7 @@ class SwipeCardWidget extends ConsumerWidget {
                   Text(
                     candidate.name,
                     style: const TextStyle(
-                      color: coulBlack,
+                      color: coulWhite,
                       fontFamily: fontRubikMedium,
                       fontSize: 20,
                     ),
@@ -95,7 +99,7 @@ class SwipeCardWidget extends ConsumerWidget {
                               style: const TextStyle(
                                   fontFamily: fontHindMaduraiMedium,
                                   fontSize: 16,
-                                  color: coulBlack),
+                                  color: coulWhite),
                             ),
                           ),
                       ],
@@ -109,13 +113,16 @@ class SwipeCardWidget extends ConsumerWidget {
                             ? desc
                             : "${desc.substring(0, 100)}...",
                         style: const TextStyle(
-                            color: coulBlack,
+                            color: coulWhite,
                             fontFamily: fontHindMaduraiRegular,
                             fontSize: 16),
                       ),
                       voirPlus == MoreInfoSwipe.VOIRPLUS
                           ? TextButton(
                               onPressed: () {
+                                ref
+                                    .watch(typeInfoStateProvider.notifier)
+                                    .update((state) => TypeInfo.LIEU);
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (context) =>

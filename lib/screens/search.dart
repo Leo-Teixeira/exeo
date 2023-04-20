@@ -1,4 +1,6 @@
+import 'package:exeo/provider/reception_provider.dart';
 import 'package:exeo/provider/search_provider.dart';
+import 'package:exeo/screens/more_info.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -39,7 +41,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
               child: const Text(
                 "Entrez votre recherche",
                 style: TextStyle(
-                  color: coulBlack,
+                  color: coulWhite,
                   fontFamily: fontRubikRegular,
                   fontSize: 28,
                 ),
@@ -68,6 +70,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                 style: const TextStyle(
                   fontFamily: fontHindMaduraiMedium,
                   fontSize: 16,
+                  color: coulWhiteGrey,
                 ),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
@@ -93,25 +96,25 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     borderSide: BorderSide(
                       width: 1,
-                      color: coulGrey,
+                      color: coulWhiteGrey,
                     ),
                     // borderRadius: BorderRadius.(),
                   ),
                   hintText: "Ex : Restaurant",
                   hintStyle: const TextStyle(
-                    fontFamily: fontHindMaduraiMedium,
-                    fontSize: 16,
-                  ),
+                      fontFamily: fontHindMaduraiMedium,
+                      fontSize: 16,
+                      color: coulWhiteGrey),
                   focusedBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     borderSide: BorderSide(
                       width: 1,
-                      color: coulGrey,
+                      color: coulWhiteGrey,
                     ),
                     // borderRadius: BorderRadius.circular(30.0),
                   ),
                   labelStyle: const TextStyle(
-                    color: coulGrey,
+                    color: coulWhiteGrey,
                     fontFamily: fontHindMaduraiMedium,
                     fontSize: 16,
                   ),
@@ -127,7 +130,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                   ? const Text(
                       "Nos suggestions",
                       style: TextStyle(
-                        color: coulBlack,
+                        color: coulWhite,
                         fontFamily: fontRubikRegular,
                         fontSize: 28,
                       ),
@@ -143,8 +146,19 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                       itemBuilder: ((context, index) {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Container(
-                            decoration: BoxDecoration(
+                          child: GestureDetector(
+                            onTap: () {
+                              ref
+                                  .watch(typeInfoStateProvider.notifier)
+                                  .update((state) => TypeInfo.LIEU);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const MoreInfoWidget(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
                                 border: Border.all(
                                     width: 1.0,
                                     color: coulBlack,
@@ -153,36 +167,39 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                                     Radius.circular(8.0)),
                                 image: const DecorationImage(
                                     image: AssetImage(
-                                        "../../assets/pictures/bar_chat.png"))),
-                            child: ListTile(
-                              contentPadding:
-                                  const EdgeInsets.fromLTRB(35, 72, 35, 0),
-                              title: const Text("Cats and Cookies",
-                                  style: TextStyle(
-                                      color: coulBlack,
-                                      fontFamily: fontRubikRegular,
-                                      fontSize: 20)),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    "Nous sommes bénévoles et intervenons comme famille d'accueil auprès des chats de la SPAA. Chez Cats and Cookies ils ont des espaces en hauteur, une verrière privative ainsi que l'accès à une cour extérieure qui leur est réservé",
+                                        "assets/pictures/bar_chat.png"),
+                                    fit: BoxFit.cover),
+                              ),
+                              child: ListTile(
+                                contentPadding:
+                                    const EdgeInsets.fromLTRB(35, 72, 35, 0),
+                                title: const Text("Cats and Cookies",
                                     style: TextStyle(
-                                        color: coulBlack,
-                                        fontFamily: fontHindMaduraiRegular,
-                                        fontSize: 14),
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                    maxLines: 1,
-                                  ),
-                                  Text(
-                                    "12h - 20h",
-                                    style: TextStyle(
-                                        color: coulBlack,
-                                        fontFamily: fontHindMaduraiRegular,
-                                        fontSize: 16),
-                                  ),
-                                ],
+                                        color: coulWhite,
+                                        fontFamily: fontRubikRegular,
+                                        fontSize: 20)),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      "Nous sommes bénévoles et intervenons comme famille d'accueil auprès des chats de la SPAA. Chez Cats and Cookies ils ont des espaces en hauteur, une verrière privative ainsi que l'accès à une cour extérieure qui leur est réservé",
+                                      style: TextStyle(
+                                          color: coulWhite,
+                                          fontFamily: fontHindMaduraiRegular,
+                                          fontSize: 14),
+                                      overflow: TextOverflow.ellipsis,
+                                      softWrap: true,
+                                      maxLines: 1,
+                                    ),
+                                    Text(
+                                      "12h - 20h",
+                                      style: TextStyle(
+                                          color: coulWhite,
+                                          fontFamily: fontHindMaduraiRegular,
+                                          fontSize: 16),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

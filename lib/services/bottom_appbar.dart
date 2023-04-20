@@ -1,3 +1,4 @@
+import 'package:exeo/provider/profil_provider.dart';
 import 'package:exeo/screens/map.dart';
 import 'package:exeo/screens/profil.dart';
 import 'package:exeo/screens/reception.dart';
@@ -46,6 +47,11 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
   _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
+
+      if (_selectedIndex == 4) {
+        ref.refresh(modifMyProfilProvider);
+        ref.refresh(editMyPasswordProfilProvider);
+      }
     });
   }
 
