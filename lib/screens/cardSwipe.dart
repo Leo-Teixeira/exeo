@@ -42,7 +42,7 @@ class SwipeCardWidget extends ConsumerWidget {
           color: coulBlack,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: coulGrey.withOpacity(0.2),
               spreadRadius: 3,
               blurRadius: 7,
               offset: const Offset(0, 3),
@@ -90,7 +90,7 @@ class SwipeCardWidget extends ConsumerWidget {
                                 const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
-                                  side: BorderSide(width: 1),
+                                  side: BorderSide(width: 1, color: coulWhite),
                                 ),
                               ),
                             ),
@@ -133,7 +133,8 @@ class SwipeCardWidget extends ConsumerWidget {
                                 "Voir plus",
                                 style: TextStyle(
                                     fontFamily: fontHindMaduraiRegular,
-                                    fontSize: 12),
+                                    fontSize: 12,
+                                    color: coulCiel),
                               ),
                             )
                           : Container()
@@ -143,17 +144,20 @@ class SwipeCardWidget extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       FloatingActionButton(
-                        backgroundColor: coulWhite,
-                        splashColor: Colors.red,
+                        backgroundColor: coulBlack,
+                        splashColor: coulRed,
                         onPressed: () {},
+                        shape: const CircleBorder(
+                          side: BorderSide(color: coulRed, width: 1),
+                        ),
                         child: const Icon(
                           Icons.thumb_down_alt,
-                          color: Colors.red,
-                          size: 50,
+                          color: coulRed,
+                          size: 30,
                         ),
                       ),
                       FloatingActionButton(
-                        backgroundColor: coulWhite,
+                        backgroundColor: coulBlack,
                         splashColor: coulCiel,
                         onPressed: () {
                           Navigator.of(context).push(
@@ -162,20 +166,26 @@ class SwipeCardWidget extends ConsumerWidget {
                             ),
                           );
                         },
+                        shape: const CircleBorder(
+                          side: BorderSide(color: coulCiel, width: 1),
+                        ),
                         child: const Icon(
                           Icons.remove_red_eye,
                           color: coulCiel,
-                          size: 50,
+                          size: 30,
                         ),
                       ),
                       FloatingActionButton(
-                        backgroundColor: coulWhite,
-                        splashColor: Colors.green,
+                        backgroundColor: coulBlack,
+                        splashColor: coulGreen,
                         onPressed: () {},
+                        shape: const CircleBorder(
+                          side: BorderSide(color: coulGreen, width: 1),
+                        ),
                         child: const Icon(
                           Icons.thumb_up_alt,
-                          color: Colors.green,
-                          size: 50,
+                          color: coulGreen,
+                          size: 30,
                         ),
                       ),
                     ],

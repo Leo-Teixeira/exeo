@@ -41,8 +41,8 @@ class SwipeWidgetState extends ConsumerState<SwipeWidget> {
                   controller: controller,
                   cardsCount: cards.length,
                   numberOfCardsDisplayed: 3,
-                  onSwipe: _onSwipe,
-                  onUndo: _onUndo,
+                  onSwipe: onSwipe,
+                  onUndo: onUndo,
                   padding: const EdgeInsets.all(24.0),
                   cardBuilder: (context, index) => cards[index],
                   isVerticalSwipingEnabled: false,
@@ -55,7 +55,7 @@ class SwipeWidgetState extends ConsumerState<SwipeWidget> {
     );
   }
 
-  bool _onSwipe(
+  bool onSwipe(
     int previousIndex,
     int? currentIndex,
     CardSwiperDirection direction,
@@ -66,7 +66,7 @@ class SwipeWidgetState extends ConsumerState<SwipeWidget> {
     return true;
   }
 
-  bool _onUndo(
+  bool onUndo(
     int? previousIndex,
     int currentIndex,
     CardSwiperDirection direction,
