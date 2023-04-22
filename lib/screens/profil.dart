@@ -1,4 +1,5 @@
 import 'package:exeo/provider/profil_provider.dart';
+import 'package:exeo/screens/more_user.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,10 +31,13 @@ class ProfilWidget extends ConsumerWidget {
           ),
           child: Column(
             children: [
+              profil == TypeProfil.OTHERPROFIL
+                  ? titlePage(ref, context)
+                  : Container(),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              profilUser(ref, modif, edit, profil, follow, option),
+              profilUser(ref, context, modif, edit, profil, follow, option),
               modif == ModifMyProfil.MODIF || edit == EditMyPasswordProfil.EDIT
                   ? modifUser(context, modif)
                   : option == OptionFollower.OPTION
@@ -46,8 +50,8 @@ class ProfilWidget extends ConsumerWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    listEvenementLike(follow),
-                    listSwipeLike(follow),
+                    listEvenementLike(follow, profil),
+                    listSwipeLike(follow, profil),
                   ],
                 ),
               )
@@ -57,6 +61,47 @@ class ProfilWidget extends ConsumerWidget {
       ),
     );
   }
+}
+
+Widget titlePage(WidgetRef ref, BuildContext context) {
+  return Container(
+    margin: const EdgeInsets.only(left: 15, right: 15),
+    child: Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          IconButton(
+            onPressed: () {
+              ref.refresh(typeProfilStateProvider);
+              ref.refresh(typeFollowStateProvider);
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: coulWhite,
+            ),
+          ),
+          const Center(
+            child: Text(
+              "Retour",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20, fontFamily: fontRubikMedium, color: coulWhite),
+            ),
+          ),
+          //! centrer le texte
+        ],
+      ),
+      Container(
+        height: 1,
+        color: coulWhite,
+        child: const Divider(
+          color: coulWhite,
+          height: 0,
+        ),
+      ),
+    ]),
+  );
 }
 
 Widget tabBarEventSwipe() {
@@ -472,8 +517,14 @@ Widget modifUser(BuildContext context, ModifMyProfil modif) {
   );
 }
 
-Widget profilUser(WidgetRef ref, ModifMyProfil modif, EditMyPasswordProfil edit,
-    TypeProfil profil, TypeFollow follow, OptionFollower option) {
+Widget profilUser(
+    WidgetRef ref,
+    BuildContext context,
+    ModifMyProfil modif,
+    EditMyPasswordProfil edit,
+    TypeProfil profil,
+    TypeFollow follow,
+    OptionFollower option) {
   return ListTile(
     leading: const CircleAvatar(
       backgroundColor: coulWhite,
@@ -501,7 +552,8 @@ Widget profilUser(WidgetRef ref, ModifMyProfil modif, EditMyPasswordProfil edit,
         ),
         GestureDetector(
           onTap: () {
-            //! faire la page qui liste tous les amis de mon profil
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const MoreUserWidget()));
           },
           child: Row(
             children: const [
@@ -639,8 +691,8 @@ Widget profilUser(WidgetRef ref, ModifMyProfil modif, EditMyPasswordProfil edit,
   );
 }
 
-Widget listEvenementLike(TypeFollow follow) {
-  if (follow == TypeFollow.FOLLOW) {
+Widget listEvenementLike(TypeFollow follow, TypeProfil profil) {
+  if (follow == TypeFollow.FOLLOW || profil == TypeProfil.MYPROFIL) {
     return ListView.separated(
         padding: const EdgeInsets.all(5),
         itemBuilder: (context, index) {
@@ -738,8 +790,8 @@ Widget listEvenementLike(TypeFollow follow) {
   }
 }
 
-Widget listSwipeLike(TypeFollow follow) {
-  if (follow == TypeFollow.FOLLOW) {
+Widget listSwipeLike(TypeFollow follow, TypeProfil profil) {
+  if (follow == TypeFollow.FOLLOW || profil == TypeProfil.MYPROFIL) {
     return ListView.separated(
         padding: const EdgeInsets.all(5),
         itemBuilder: (context, index) {
@@ -747,6 +799,10 @@ Widget listSwipeLike(TypeFollow follow) {
             margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             height: 112,
             decoration: BoxDecoration(
+              image: const DecorationImage(
+                image: AssetImage("assets/pictures/bar_chat.png"),
+                fit: BoxFit.cover,
+              ),
               border: Border.all(
                   width: 1.0, color: coulBlack, style: BorderStyle.solid),
               borderRadius: const BorderRadius.all(Radius.circular(8.0)),

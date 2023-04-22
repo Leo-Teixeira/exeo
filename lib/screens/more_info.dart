@@ -1,4 +1,5 @@
 import 'package:exeo/provider/reception_provider.dart';
+import 'package:exeo/screens/more_user.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -29,7 +30,7 @@ class MoreInfoWidget extends ConsumerWidget {
               const SizedBox(
                 height: 24,
               ),
-              bodyPage(ref),
+              bodyPage(ref, context),
             ],
           ),
         ),
@@ -59,7 +60,7 @@ Widget titlePage(BuildContext context) {
   );
 }
 
-Widget bodyPage(WidgetRef ref) {
+Widget bodyPage(WidgetRef ref, BuildContext context) {
   TypeInfo type = ref.watch(typeInfoStateProvider);
   return Container(
     margin: const EdgeInsets.only(left: 15, right: 15),
@@ -108,33 +109,39 @@ Widget bodyPage(WidgetRef ref) {
           height: 8,
         ),
         //!mettre un listView builder pour afficher tous les avatar en plus
-        Row(
-          children: const [
-            // Container(
-            //   width: 20,
-            //   child: Stack(
-            //     children: [
-            //       for (int i = 0; i < 5; i++)
-            //         Positioned(
-            //           left: 10 + i.toDouble(),
-            //           child: CircleAvatar(
-            //             radius: 10,
-            //           ),
-            //         )
-            //     ],
-            //   ),
-            // ),
-            // const SizedBox(
-            //   width: 10,
-            // ),
-            Text(
-              "+ de 300 pers. suivent l'évènement",
-              style: TextStyle(
-                  fontFamily: fontHindMaduraiRegular,
-                  fontSize: 12,
-                  color: coulWhite),
-            ),
-          ],
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const MoreUserWidget()));
+          },
+          child: Row(
+            children: const [
+              // Container(
+              //   width: 20,
+              //   child: Stack(
+              //     children: [
+              //       for (int i = 0; i < 5; i++)
+              //         Positioned(
+              //           left: 10 + i.toDouble(),
+              //           child: CircleAvatar(
+              //             radius: 10,
+              //           ),
+              //         )
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 10,
+              // ),
+              Text(
+                "+ de 300 pers. suivent l'évènement",
+                style: TextStyle(
+                    fontFamily: fontHindMaduraiRegular,
+                    fontSize: 12,
+                    color: coulWhite),
+              ),
+            ],
+          ),
         ),
         const SizedBox(
           height: 8,

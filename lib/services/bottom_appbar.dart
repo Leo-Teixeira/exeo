@@ -51,6 +51,9 @@ class NavBarWidgetState extends ConsumerState<NavBarWidget> {
       if (_selectedIndex == 4) {
         ref.refresh(modifMyProfilProvider);
         ref.refresh(editMyPasswordProfilProvider);
+        ref
+            .watch(typeProfilStateProvider.notifier)
+            .update((state) => TypeProfil.MYPROFIL);
       }
     });
   }

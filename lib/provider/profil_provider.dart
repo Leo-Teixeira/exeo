@@ -37,7 +37,7 @@ final myPasswordProfilProvider = Provider<EditMyPasswordProfil>((ref) {
 enum TypeProfil { MYPROFIL, OTHERPROFIL }
 
 final typeProfilStateProvider =
-    StateProvider<TypeProfil>((ref) => TypeProfil.OTHERPROFIL);
+    StateProvider<TypeProfil>((ref) => TypeProfil.MYPROFIL);
 
 final typeProfilProvider = Provider<TypeProfil>((ref) {
   final sortType = ref.watch(typeProfilStateProvider);
