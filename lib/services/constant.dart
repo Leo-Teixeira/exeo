@@ -29,6 +29,8 @@ const String fontHindMaduraiRegular = 'HindMaduraiRegular';
 const String fontHindMaduraiMedium = 'HindMaduraiMedium';
 const String fontHindMaduraiBold = 'HindMaduraiBold';
 
+const String urlApi = "http://mdp01.mdstestangers.fr/";
+
 /*
 * Mise en place de l'appBar
 */

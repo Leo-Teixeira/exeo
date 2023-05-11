@@ -1,3 +1,8 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print, unused_result
+
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:exeo/provider/login_provider.dart';
 import 'package:exeo/screens/forgot_password.dart';
 import 'package:exeo/screens/inscription.dart';
@@ -22,10 +27,10 @@ class LoginWidget extends ConsumerWidget {
 // ignore: must_be_immutable
 class LoginPage extends ConsumerWidget {
   final GlobalKey<FormState> _loginKey = GlobalKey();
-  FocusNode identifiant = FocusNode();
+  FocusNode email = FocusNode();
   FocusNode password = FocusNode();
   final passwordController = TextEditingController();
-  final identifiantController = TextEditingController();
+  final emailController = TextEditingController();
 
   LoginPage({super.key});
 
@@ -62,9 +67,9 @@ class LoginPage extends ConsumerWidget {
                         child: TextFormField(
                           // autofillHints: const [AutofillHints.email],
                           textInputAction: TextInputAction.next,
-                          focusNode: identifiant,
+                          focusNode: email,
                           onFieldSubmitted: (term) {
-                            identifiant.unfocus();
+                            email.unfocus();
                             FocusScope.of(context).requestFocus(password);
                           },
                           validator: (value) {
@@ -73,11 +78,11 @@ class LoginPage extends ConsumerWidget {
                             }
                             return null;
                           },
-                          controller: identifiantController,
+                          controller: emailController,
                           style: const TextStyle(
-                            fontFamily: fontHindMaduraiMedium,
-                            fontSize: 16,
-                          ),
+                              fontFamily: fontHindMaduraiMedium,
+                              fontSize: 16,
+                              color: coulWhiteGrey),
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -123,7 +128,7 @@ class LoginPage extends ConsumerWidget {
                               obscureText:
                                   pwdShow == ModePassword.HIDE ? true : false,
                               onFieldSubmitted: (term) {
-                                identifiant.unfocus();
+                                email.unfocus();
                                 FocusScope.of(context).requestFocus(password);
                               },
                               validator: (value) {
@@ -215,10 +220,23 @@ class LoginPage extends ConsumerWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => const NavBarPage()));
+                          onPressed: () async {
+                            var bytes = utf8.encode(passwordController
+                                .text); // Convertit la chaîne en bytes UTF-8
+                            var digest = sha256.convert(bytes).toString();
+                            bool result = await ref.watch(loginUser(jsonEncode({
+                              "email": emailController.text,
+                              "password": digest,
+                              "lng": 0,
+                              "lat": 0
+                            })).future);
+                            if (result == true) {
+                              ref.refresh(showHidePawdProviderState);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const NavBarPage()));
+                            } else {
+                              print("mot de passe incorrect");
+                            }
                           },
                           style: ButtonStyle(
                             backgroundColor:

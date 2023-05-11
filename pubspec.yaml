@@ -30,6 +30,14 @@ dependencies:
 
   flutter_svg: ^2.0.4
 
+  crypto: ^3.0.3
+
+  intl: ^0.18.1
+
+  flutter_masked_text2: ^0.9.1
+
+  flutter_native_splash: ^2.2.19
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

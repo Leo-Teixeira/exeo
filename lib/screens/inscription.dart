@@ -1,23 +1,31 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:crypto/crypto.dart';
 import 'package:exeo/provider/login_provider.dart';
 import 'package:exeo/screens/login.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:intl/intl.dart';
 
 class InscriptionPage extends ConsumerWidget {
   final GlobalKey<FormState> _loginKey = GlobalKey();
   FocusNode lastname = FocusNode();
   FocusNode firstname = FocusNode();
   FocusNode birtdate = FocusNode();
-  FocusNode mail = FocusNode();
+  FocusNode email = FocusNode();
   FocusNode password = FocusNode();
   FocusNode confirmPassword = FocusNode();
   final lastnameController = TextEditingController();
   final firstnameController = TextEditingController();
-  final birthdateController = TextEditingController();
-  final mailController = TextEditingController();
+  final birthdateController = MaskedTextController(mask: "0000-00-00");
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
 
@@ -165,7 +173,7 @@ class InscriptionPage extends ConsumerWidget {
                           focusNode: birtdate,
                           onFieldSubmitted: (term) {
                             birtdate.unfocus();
-                            FocusScope.of(context).requestFocus(mail);
+                            FocusScope.of(context).requestFocus(email);
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -219,9 +227,9 @@ class InscriptionPage extends ConsumerWidget {
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
-                          focusNode: mail,
+                          focusNode: email,
                           onFieldSubmitted: (term) {
-                            mail.unfocus();
+                            email.unfocus();
                             FocusScope.of(context).requestFocus(password);
                           },
                           validator: (value) {
@@ -230,7 +238,7 @@ class InscriptionPage extends ConsumerWidget {
                             }
                             return null;
                           },
-                          controller: mailController,
+                          controller: emailController,
                           style: const TextStyle(
                               fontFamily: fontHindMaduraiMedium,
                               fontSize: 16,
@@ -417,7 +425,21 @@ class InscriptionPage extends ConsumerWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            var bytes = utf8.encode(passwordController
+                                .text); // Convertit la chaîne en bytes UTF-8
+                            String digest = sha256.convert(bytes).toString();
+                            await ref.watch(registerUser(jsonEncode({
+                              "email": emailController.text,
+                              "password": digest,
+                              "firstname": firstnameController.text,
+                              "lastname": lastnameController.text,
+                              "birth_date": birthdateController.text,
+                              "lng": 0,
+                              "lat": 0
+                            })).future);
+                            Navigator.of(context).pop();
+                          },
                           style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all<Color?>(coulCiel),
