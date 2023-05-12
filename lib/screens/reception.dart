@@ -252,7 +252,11 @@ class ReceptionPage extends ConsumerWidget {
                                                       Radius.circular(8.0)),
                                             ),
                                             child: Image.network(
-                                              "http://mdp01.mdstestangers.fr${activites[i].content!}",
+                                              i == 1
+                                                  ? "http://mdp01.mdstestangers.fr${activites[j + 2].content!}"
+                                                  : i == 2
+                                                      ? "http://mdp01.mdstestangers.fr${activites[j + 3].content!}"
+                                                      : "http://mdp01.mdstestangers.fr${activites[j].content!}",
                                               width: 100,
                                               fit: BoxFit.cover,
                                             ),
@@ -261,7 +265,11 @@ class ReceptionPage extends ConsumerWidget {
                                             margin: const EdgeInsets.fromLTRB(
                                                 10, 0, 0, 0),
                                             child: Text(
-                                              activites[i].name,
+                                              i == 1
+                                                  ? activites[j + 2].name
+                                                  : i == 2
+                                                      ? activites[j + 3].name
+                                                      : activites[j].name,
                                               style: const TextStyle(
                                                   fontFamily:
                                                       fontHindMaduraiMedium,
