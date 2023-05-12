@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:exeo/models/category_model.dart';
 import 'package:exeo/models/event_model.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,12 +53,38 @@ final getEvenements = FutureProvider<List<Event>>((ref) async {
   }
   if (response.statusCode == 200) {
     var res = json["data"];
-    print(res);
     if (res != null) {
       for (int i = 0; i < res.length; i++) {
-        infoEventList.add(Event.fromMap(res));
+        infoEventList.add(Event.fromMap(res[i]));
       }
       return infoEventList;
+    } else {
+      return [];
+    }
+  } else {
+    throw Exception('failed to login');
+  }
+});
+
+final getActivite = FutureProvider<List<Category>>((ref) async {
+  final List<Category> infoCategoryList = [];
+  final apiUrl = Uri.parse("${urlApi}category");
+  final response = await http.get(apiUrl, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+  final json = jsonDecode(response.body);
+  if (json['status'] == 201) {
+    return [];
+  }
+  if (response.statusCode == 200) {
+    var res = json["data"];
+    if (res != null) {
+      for (int i = 0; i < res.length; i++) {
+        infoCategoryList.add(Category.fromMap(res[i]));
+      }
+      print(infoCategoryList);
+      return infoCategoryList;
     } else {
       return [];
     }

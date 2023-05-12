@@ -4,19 +4,22 @@ import 'dart:convert';
 class Category {
   final int id;
   final String name;
-  final int access_vip;
+  final String? description;
+  final String? content;
 
   Category({
     required this.id,
     required this.name,
-    required this.access_vip,
+    required this.description,
+    required this.content,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'name': name,
-      'access_vip': access_vip,
+      'description': description,
+      'content': content,
     };
   }
 
@@ -24,7 +27,8 @@ class Category {
     return Category(
       id: map['id'] as int,
       name: map['name'] as String,
-      access_vip: map['access_vip'] as int,
+      description: map['description'] != null ? map['description'] as String : null,
+      content: map['content'] != null ? map['content'] as String : null,
     );
   }
 
