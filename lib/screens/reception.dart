@@ -2,6 +2,7 @@ import 'package:exeo/models/category_model.dart';
 import 'package:exeo/models/event_model.dart';
 import 'package:exeo/provider/event_provider.dart';
 import 'package:exeo/provider/reception_provider.dart';
+import 'package:exeo/screens/more_activities.dart';
 import 'package:exeo/screens/more_event.dart';
 import 'package:exeo/screens/more_info.dart';
 import 'package:exeo/services/constant.dart';
@@ -316,7 +317,10 @@ class ReceptionPage extends ConsumerWidget {
               }),
 
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => MoreActivities()));
+                },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(sizeWidth / 2.5, 0, 0, 0),
                   child: const Text(
