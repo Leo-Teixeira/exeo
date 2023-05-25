@@ -1,6 +1,7 @@
 import 'package:exeo/models/category_model.dart';
 import 'package:exeo/models/event_model.dart';
 import 'package:exeo/provider/reception_provider.dart';
+import 'package:exeo/screens/more_event.dart';
 import 'package:exeo/screens/more_info.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class ReceptionPage extends ConsumerWidget {
     double sizeWidth = size.width;
 
     AddFavoris favoris = ref.watch(addFavorisStateProvider);
-    AsyncValue<List<Event>> listEvent = ref.watch(getEvenements);
+    AsyncValue<List<Event>> listEvent = ref.watch(getEvenementsLimit);
     AsyncValue<List<Category>> listActivite = ref.watch(getActivite);
 
     return Scaffold(
@@ -79,8 +80,9 @@ class ReceptionPage extends ConsumerWidget {
                                     .update((state) => TypeInfo.EVENEMENT);
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MoreInfoWidget(),
+                                    builder: (context) => MoreInfoWidget(
+                                      info_event: events[i],
+                                    ),
                                   ),
                                 );
                               },
@@ -110,7 +112,7 @@ class ReceptionPage extends ConsumerWidget {
                                             color: coulWhite),
                                       ),
                                       Text(
-                                        events[i].subtitle,
+                                        truncateText(events[i].subtitle, 100),
                                         style: TextStyle(
                                             fontFamily: fontHindMaduraiRegular,
                                             fontSize: 12,
@@ -171,7 +173,8 @@ class ReceptionPage extends ConsumerWidget {
               ),
               TextButton(
                 onPressed: () {
-                  //! faire la page pour avoir la liste de tous les évènements
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MoreEvent()));
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(sizeWidth / 2.5, 0, 0, 0),

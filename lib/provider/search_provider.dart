@@ -23,6 +23,7 @@ final listModePorvider = Provider<ListSearch>((ref) {
   }
 });
 
+//! en attente de la route
 final getAllEvents = FutureProvider(
   (ref) async {
     final List<Event> infoEventList = [];
@@ -50,3 +51,5 @@ final getAllEvents = FutureProvider(
     }
   },
 );
+
+final searchEventByName = FutureProvider((ref) {});

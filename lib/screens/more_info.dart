@@ -1,16 +1,22 @@
-import 'package:exeo/provider/reception_provider.dart';
-import 'package:exeo/screens/more_user.dart';
-import 'package:exeo/services/constant.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:exeo/models/event_model.dart';
+import 'package:exeo/provider/reception_provider.dart';
+import 'package:exeo/screens/more_user.dart';
+import 'package:exeo/services/constant.dart';
+
 class MoreInfoWidget extends ConsumerWidget {
-  const MoreInfoWidget({super.key});
+  final Event? info_event;
+  const MoreInfoWidget({Key? key, this.info_event}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final TypeInfo type = ref.watch(typeInfoStateProvider.notifier).state;
     return Scaffold(
       backgroundColor: coulBlack,
       appBar: appBarReception(context),
@@ -30,7 +36,7 @@ class MoreInfoWidget extends ConsumerWidget {
               const SizedBox(
                 height: 24,
               ),
-              bodyPage(ref, context),
+              bodyPage(ref, context, info_event),
             ],
           ),
         ),
@@ -60,7 +66,7 @@ Widget titlePage(BuildContext context) {
   );
 }
 
-Widget bodyPage(WidgetRef ref, BuildContext context) {
+Widget bodyPage(WidgetRef ref, BuildContext context, [Event? infoEvent]) {
   TypeInfo type = ref.watch(typeInfoStateProvider);
   return Container(
     margin: const EdgeInsets.only(left: 15, right: 15),
@@ -74,9 +80,9 @@ Widget bodyPage(WidgetRef ref, BuildContext context) {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              "Nom Lieu",
-              style: TextStyle(
+            Text(
+              type == TypeInfo.EVENEMENT ? infoEvent!.title : "",
+              style: const TextStyle(
                   fontFamily: fontRubikMedium, fontSize: 20, color: coulWhite),
             ),
             RatingBar.builder(
@@ -100,8 +106,8 @@ Widget bodyPage(WidgetRef ref, BuildContext context) {
         const SizedBox(
           height: 8,
         ),
-        const Text(
-          "Nom Evenement",
+        Text(
+          type == TypeInfo.EVENEMENT ? infoEvent!.title : "",
           style: TextStyle(
               fontFamily: fontRubikMedium, fontSize: 16, color: coulWhite),
         ),
@@ -250,9 +256,9 @@ Widget bodyPage(WidgetRef ref, BuildContext context) {
         const SizedBox(
           height: 24,
         ),
-        const Text(
-          "Lorem ipsum dolor sit amet consectetur. Pretium augue at vel mattis rhoncus eros ultricies. Aliquet aliquam ut gravida sociis porttitor suscipit viverra morbi ultrices. Mauris vitae id lacus velit integer placerat quis gravida euismod. At tempus vel urna vitae congue a nisl. Amet maecenas vel porttitor eros amet. Quis est a sit lorem lectus. Euismod et lacus facilisis turpis proin. Enim tristique nunc enim arcu purus risus augue. Tellus diam lorem eget ut pharetra eu.Quisque mi ipsum massa natoque sit dolor. Facilisi adipiscing morbi id amet mattis sed at magnis. Varius arcu integer molestie suspendisse nibh diam. Faucibus iaculis ut netus dapibus nisi nunc. Justo at eros nisl aliquam at sapien vitae. Tincidunt proin aliquet urna rutrum odio diam est cursus. Quis viverra proin mi gravida. Eget faucibus pellentesque non eget pharetra lorem nunc. Vitae scelerisque at vitae eleifend nullam tempus sapien. Faucibus semper ipsum velit ullamcorper commodo tristique. Urna senectus arcu neque vitae et non.",
-          style: TextStyle(
+        Text(
+          type == TypeInfo.EVENEMENT ? infoEvent!.description : "",
+          style: const TextStyle(
             fontFamily: fontHindMaduraiMedium,
             fontSize: 16,
             color: coulWhite,
