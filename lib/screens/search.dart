@@ -1,3 +1,5 @@
+import 'package:exeo/models/event_model.dart';
+import 'package:exeo/provider/event_provider.dart';
 import 'package:exeo/provider/reception_provider.dart';
 import 'package:exeo/provider/search_provider.dart';
 import 'package:exeo/screens/more_info.dart';
@@ -20,6 +22,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    List<Event> listSearchEvent = [];
     ListSearch mode = ref.watch(listModePorvider);
     return Scaffold(
       backgroundColor: coulBlack,
@@ -63,10 +66,11 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                         .watch(listSearchProviderState.notifier)
                         .update((state) => ListSearch.SEARCH);
                   }
-                  // ! adapter avec les valeurs obtenu par l'api
-                  setState(() {});
+                  ref
+                      .watch(searchEventProvider.notifier)
+                      .filterSearchEvent(value);
                 },
-                controller: searchBar,
+                controller: ref.watch(searchControllerProvider),
                 style: const TextStyle(
                   fontFamily: fontHindMaduraiMedium,
                   fontSize: 16,
@@ -140,83 +144,177 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
             const SizedBox(
               height: 18,
             ),
-            Expanded(
-              child: mode == ListSearch.LIST
-                  ? ListView.separated(
-                      itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: GestureDetector(
-                            onTap: () {
-                              ref
-                                  .watch(typeInfoStateProvider.notifier)
-                                  .update((state) => TypeInfo.LIEU);
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const MoreInfoWidget(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0,
-                                    color: coulBlack,
-                                    style: BorderStyle.solid),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(8.0)),
-                                image: const DecorationImage(
-                                    image: AssetImage(
-                                        "assets/pictures/bar_chat.png"),
-                                    fit: BoxFit.cover),
-                              ),
-                              child: ListTile(
-                                contentPadding:
-                                    const EdgeInsets.fromLTRB(35, 72, 35, 0),
-                                title: const Text("Cats and Cookies",
-                                    style: TextStyle(
-                                        color: coulWhite,
-                                        fontFamily: fontRubikRegular,
-                                        fontSize: 20)),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      "Nous sommes bénévoles et intervenons comme famille d'accueil auprès des chats de la SPAA. Chez Cats and Cookies ils ont des espaces en hauteur, une verrière privative ainsi que l'accès à une cour extérieure qui leur est réservé",
-                                      style: TextStyle(
-                                          color: coulWhite,
-                                          fontFamily: fontHindMaduraiRegular,
-                                          fontSize: 14),
-                                      overflow: TextOverflow.ellipsis,
-                                      softWrap: true,
-                                      maxLines: 1,
-                                    ),
-                                    Text(
-                                      "12h - 20h",
-                                      style: TextStyle(
-                                          color: coulWhite,
-                                          fontFamily: fontHindMaduraiRegular,
-                                          fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                      separatorBuilder: ((context, index) {
-                        return const SizedBox(
-                          height: 16,
-                        );
-                      }),
-                      itemCount: 10)
-                  : // ! adapter la recherche avec valeur obtenu
-                  Container(),
-            ),
+            mode == ListSearch.LIST
+                ? infoEvent(ref, mode)
+                : infoEventSearch(ref, mode)
           ],
         ),
       ),
     );
   }
+}
+
+Widget infoEvent(WidgetRef ref, ListSearch mode) {
+  AsyncValue<List<Event>> listEvents = ref.watch(getEvenementsLimit(30));
+  return listEvents.when(data: (events) {
+    return Expanded(
+        child: ListView.separated(
+            itemBuilder: ((context, index) {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: GestureDetector(
+                  onTap: () {
+                    ref
+                        .watch(typeInfoStateProvider.notifier)
+                        .update((state) => TypeInfo.LIEU);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MoreInfoWidget(
+                          info_event: events[index],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 1.0,
+                          color: coulBlack,
+                          style: BorderStyle.solid),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(8.0)),
+                      image: const DecorationImage(
+                          image: AssetImage("assets/pictures/bar_chat.png"),
+                          fit: BoxFit.cover),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.fromLTRB(35, 72, 35, 0),
+                      title: Text(events[index].title,
+                          style: const TextStyle(
+                              color: coulWhite,
+                              fontFamily: fontRubikRegular,
+                              fontSize: 20)),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            events[index].description,
+                            style: const TextStyle(
+                                color: coulWhite,
+                                fontFamily: fontHindMaduraiRegular,
+                                fontSize: 14),
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            maxLines: 1,
+                          ),
+                          Text(
+                            events[index].start_date,
+                            style: const TextStyle(
+                                color: coulWhite,
+                                fontFamily: fontHindMaduraiRegular,
+                                fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+            separatorBuilder: ((context, index) {
+              return const SizedBox(
+                height: 16,
+              );
+            }),
+            itemCount: events.length));
+  }, error: (err, stack) {
+    return Center(child: Text(stack.toString()));
+  }, loading: () {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  });
+}
+
+Widget infoEventSearch(WidgetRef ref, ListSearch mode) {
+  AsyncValue<List<Event>> listEventsSearch = ref.watch(
+      getEventByTitleProvider(ref.watch(searchEventProvider.notifier).state));
+  return listEventsSearch.when(data: (listEvents) {
+    return Expanded(
+        child: ListView.separated(
+            itemBuilder: ((context, index) {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: GestureDetector(
+                  onTap: () {
+                    ref
+                        .watch(typeInfoStateProvider.notifier)
+                        .update((state) => TypeInfo.LIEU);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MoreInfoWidget(
+                          info_event: listEvents[index],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 1.0,
+                          color: coulBlack,
+                          style: BorderStyle.solid),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(8.0)),
+                      image: const DecorationImage(
+                          image: AssetImage("assets/pictures/bar_chat.png"),
+                          fit: BoxFit.cover),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.fromLTRB(35, 72, 35, 0),
+                      title: Text(listEvents[index].title,
+                          style: const TextStyle(
+                              color: coulWhite,
+                              fontFamily: fontRubikRegular,
+                              fontSize: 20)),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            listEvents[index].description,
+                            style: const TextStyle(
+                                color: coulWhite,
+                                fontFamily: fontHindMaduraiRegular,
+                                fontSize: 14),
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            maxLines: 1,
+                          ),
+                          Text(
+                            listEvents[index].start_date,
+                            style: const TextStyle(
+                                color: coulWhite,
+                                fontFamily: fontHindMaduraiRegular,
+                                fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+            separatorBuilder: ((context, index) {
+              return const SizedBox(
+                height: 16,
+              );
+            }),
+            itemCount: listEvents.length));
+  }, error: (err, stack) {
+    return Center(child: Text(stack.toString()));
+  }, loading: () {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  });
 }

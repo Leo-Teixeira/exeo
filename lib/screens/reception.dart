@@ -18,7 +18,7 @@ class ReceptionPage extends ConsumerWidget {
     double sizeWidth = size.width;
 
     AddFavoris favoris = ref.watch(addFavorisStateProvider);
-    AsyncValue<List<Event>> listEvent = ref.watch(getEvenementsLimit);
+    AsyncValue<List<Event>> listEvent = ref.watch(getEvenementsLimit(5));
     AsyncValue<List<Category>> listActivite = ref.watch(getActivite);
 
     return Scaffold(

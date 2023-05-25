@@ -40,9 +40,10 @@ final typeInfoProvider = Provider<TypeInfo>((ref) {
   }
 });
 
-final getEvenementsLimit = FutureProvider<List<Event>>((ref) async {
+final getEvenementsLimit =
+    FutureProvider.family<List<Event>, int>((ref, limit) async {
   final List<Event> infoEventList = [];
-  final apiUrl = Uri.parse("${urlApi}event/limit");
+  final apiUrl = Uri.parse("${urlApi}event/limit/$limit");
   final response = await http.get(apiUrl, headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
