@@ -8,6 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
+class ReceptionPageAutoConnect extends ConsumerWidget {
+  const ReceptionPageAutoConnect({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ReceptionPage(),
+    );
+  }
+}
+
 class ReceptionPage extends ConsumerWidget {
   const ReceptionPage({super.key});
 
@@ -122,37 +134,37 @@ class ReceptionPage extends ConsumerWidget {
                                   ),
                                 ),
                               ),
-                              trailing: Container(
-                                margin: const EdgeInsets.fromLTRB(0, 45, 0, 0),
-                                child: IconButton(
-                                  onPressed: () {
-                                    if (favoris == AddFavoris.FAVORIS) {
-                                      ref
-                                          .watch(
-                                              addFavorisStateProvider.notifier)
-                                          .update(
-                                              (state) => AddFavoris.UNFAVORIS);
-                                    } else {
-                                      ref
-                                          .watch(
-                                              addFavorisStateProvider.notifier)
-                                          .update(
-                                              (state) => AddFavoris.FAVORIS);
-                                    }
-                                  },
-                                  icon: favoris == AddFavoris.UNFAVORIS
-                                      ? const Icon(
-                                          Icons.bookmark_add_outlined,
-                                          size: 30,
-                                          color: coulWhite,
-                                        )
-                                      : const Icon(
-                                          Icons.bookmark,
-                                          color: coulYellow,
-                                          size: 30,
-                                        ),
-                                ),
-                              ),
+                              // trailing: Container(
+                              //   margin: const EdgeInsets.fromLTRB(0, 45, 0, 0),
+                              //   child: IconButton(
+                              //     onPressed: () {
+                              //       if (favoris == AddFavoris.FAVORIS) {
+                              //         ref
+                              //             .watch(
+                              //                 addFavorisStateProvider.notifier)
+                              //             .update(
+                              //                 (state) => AddFavoris.UNFAVORIS);
+                              //       } else {
+                              //         ref
+                              //             .watch(
+                              //                 addFavorisStateProvider.notifier)
+                              //             .update(
+                              //                 (state) => AddFavoris.FAVORIS);
+                              //       }
+                              //     },
+                              //     icon: favoris == AddFavoris.UNFAVORIS
+                              //         ? const Icon(
+                              //             Icons.bookmark_add_outlined,
+                              //             size: 30,
+                              //             color: coulWhite,
+                              //           )
+                              //         : const Icon(
+                              //             Icons.bookmark,
+                              //             color: coulYellow,
+                              //             size: 30,
+                              //           ),
+                              //   ),
+                              // ),
                             ),
                           ),
                         ],

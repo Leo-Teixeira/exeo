@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// ! pouvoir également rechercher un utilisateur depuis cette interface
 
 class SearchPageWidget extends ConsumerStatefulWidget {
   const SearchPageWidget({super.key});
@@ -166,7 +165,7 @@ Widget infoEvent(WidgetRef ref, ListSearch mode) {
                   onTap: () {
                     ref
                         .watch(typeInfoStateProvider.notifier)
-                        .update((state) => TypeInfo.LIEU);
+                        .update((state) => TypeInfo.EVENEMENT);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MoreInfoWidget(
@@ -249,7 +248,7 @@ Widget infoEventSearch(WidgetRef ref, ListSearch mode) {
                   onTap: () {
                     ref
                         .watch(typeInfoStateProvider.notifier)
-                        .update((state) => TypeInfo.LIEU);
+                        .update((state) => TypeInfo.EVENEMENT);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MoreInfoWidget(

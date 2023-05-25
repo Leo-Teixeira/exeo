@@ -225,12 +225,12 @@ class LoginPage extends ConsumerWidget {
                             var bytes = utf8.encode(passwordController
                                 .text); // Convertit la chaîne en bytes UTF-8
                             var digest = sha256.convert(bytes).toString();
-                            bool result = await ref.watch(loginUser(jsonEncode({
+                            bool result = await ref.watch(loginUser({
                               "email": emailController.text,
                               "password": digest,
                               "lng": 0,
                               "lat": 0
-                            })).future);
+                            }).future);
                             if (result == true) {
                               ref.refresh(showHidePawdProviderState);
                               Navigator.of(context).push(MaterialPageRoute(
