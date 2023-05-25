@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:exeo/services/constant.dart';
+import 'package:exeo/services/design_patterns.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 enum ModifMyProfil { MODIF, UNMODIF }
 
@@ -82,5 +88,90 @@ final optionFollowerProvider = Provider<OptionFollower>((ref) {
 
     case OptionFollower.UNOPTION:
       return OptionFollower.UNOPTION;
+  }
+});
+
+final listFriendshipUserProvider = FutureProvider<bool>((ref) async {
+  SharedPreferences prefs = await SingletonSharedPreferences.getInstance();
+  final apiUrl =
+      Uri.parse("${urlApi}friendship/${prefs.getInt('idUser').toString()}");
+  final response = await http.get(apiUrl, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    print(json);
+    var res = json['data'];
+
+    // final User infoContactSociete = User.fromMap(res);
+    return true;
+  } else {
+    return false;
+  }
+});
+
+final addFriendshipUserProvider =
+    FutureProvider.family<bool, int>((ref, friendId) async {
+  SharedPreferences prefs = await SingletonSharedPreferences.getInstance();
+  final apiUrl = Uri.parse(
+      "${urlApi}addFriend/${prefs.getInt('idUser').toString()}/$friendId");
+  final response = await http.get(apiUrl, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    print(json);
+    var res = json['data'];
+
+    // final User infoContactSociete = User.fromMap(res);
+    return true;
+  } else {
+    return false;
+  }
+});
+
+final editInfoUserProvider =
+    FutureProvider.family<bool, Map<String, dynamic>>((ref, infoUser) async {
+  SharedPreferences prefs = await SingletonSharedPreferences.getInstance();
+  final apiUrl = Uri.parse("${urlApi}editUser");
+  final response = await http.post(apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: jsonEncode(infoUser));
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    print(json);
+    var res = json['data'];
+
+    // final User infoContactSociete = User.fromMap(res);
+    return true;
+  } else {
+    return false;
+  }
+});
+
+final editMdpUserProvider =
+    FutureProvider.family<bool, Map<String, dynamic>>((ref, infoUser) async {
+  SharedPreferences prefs = await SingletonSharedPreferences.getInstance();
+  final apiUrl = Uri.parse("${urlApi}editUserPassword");
+  final response = await http.post(apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: jsonEncode(infoUser));
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    print(json);
+    var res = json['data'];
+
+    // final User infoContactSociete = User.fromMap(res);
+    return true;
+  } else {
+    return false;
   }
 });
