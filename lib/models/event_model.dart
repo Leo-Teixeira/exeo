@@ -1,25 +1,25 @@
 import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class Event {
+class Events {
   final int id;
   final String start_date;
   final String end_date;
   final String title;
   final String subtitle;
   final String description;
-  final int id_company;
-  final int id_category;
-  
-  Event({
+  final String Category;
+  final String Company;
+
+  Events({
     required this.id,
     required this.start_date,
     required this.end_date,
     required this.title,
     required this.subtitle,
     required this.description,
-    required this.id_company,
-    required this.id_category,
+    required this.Category,
+    required this.Company,
   });
 
   Map<String, dynamic> toMap() {
@@ -30,25 +30,26 @@ class Event {
       'title': title,
       'subtitle': subtitle,
       'description': description,
-      'id_company': id_company,
-      'id_category': id_category,
+      'Category': Category,
+      'Company': Company,
     };
   }
 
-  factory Event.fromMap(Map<String, dynamic> map) {
-    return Event(
+  factory Events.fromMap(Map<String, dynamic> map) {
+    return Events(
       id: map['id'] as int,
       start_date: map['start_date'] as String,
       end_date: map['end_date'] as String,
       title: map['title'] as String,
       subtitle: map['subtitle'] as String,
       description: map['description'] as String,
-      id_company: map['id_company'] as int,
-      id_category: map['id_category'] as int,
+      Category: map['Category'] as String,
+      Company: map['Company'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Event.fromJson(String source) => Event.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Events.fromJson(String source) =>
+      Events.fromMap(json.decode(source) as Map<String, dynamic>);
 }

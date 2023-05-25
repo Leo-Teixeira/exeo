@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:exeo/provider/login_provider.dart';
 import 'package:exeo/screens/login.dart';
 import 'package:exeo/screens/reception.dart';
+import 'package:exeo/services/bottom_appbar.dart';
 import 'package:exeo/services/design_patterns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +29,7 @@ void main() async {
       "password": prefs.getString("password").toString()
     });
     if (result == true) {
-      runApp(const ProviderScope(child: ReceptionPageAutoConnect()));
+      runApp(const ProviderScope(child: NavBarPage()));
     } else {
       runApp(const ProviderScope(child: LoginWidget()));
     }

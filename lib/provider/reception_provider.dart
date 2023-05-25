@@ -41,8 +41,8 @@ final typeInfoProvider = Provider<TypeInfo>((ref) {
 });
 
 final getEvenementsLimit =
-    FutureProvider.family<List<Event>, int>((ref, limit) async {
-  final List<Event> infoEventList = [];
+    FutureProvider.family<List<Events>, int>((ref, limit) async {
+  final List<Events> infoEventList = [];
   final apiUrl = Uri.parse("${urlApi}event/limit/$limit");
   final response = await http.get(apiUrl, headers: {
     'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ final getEvenementsLimit =
     var res = json["data"];
     if (res != null) {
       for (int i = 0; i < res.length; i++) {
-        infoEventList.add(Event.fromMap(res[i]));
+        infoEventList.add(Events.fromMap(res[i]));
       }
       return infoEventList;
     } else {

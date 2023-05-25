@@ -1,5 +1,6 @@
 import 'package:exeo/models/category_model.dart';
 import 'package:exeo/models/event_model.dart';
+import 'package:exeo/provider/event_provider.dart';
 import 'package:exeo/provider/reception_provider.dart';
 import 'package:exeo/screens/more_event.dart';
 import 'package:exeo/screens/more_info.dart';
@@ -7,18 +8,6 @@ import 'package:exeo/services/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-
-class ReceptionPageAutoConnect extends ConsumerWidget {
-  const ReceptionPageAutoConnect({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ReceptionPage(),
-    );
-  }
-}
 
 class ReceptionPage extends ConsumerWidget {
   const ReceptionPage({super.key});
@@ -30,7 +19,7 @@ class ReceptionPage extends ConsumerWidget {
     double sizeWidth = size.width;
 
     AddFavoris favoris = ref.watch(addFavorisStateProvider);
-    AsyncValue<List<Event>> listEvent = ref.watch(getEvenementsLimit(5));
+    AsyncValue<List<Events>> listEvent = ref.watch(getEvenementsLimit(5));
     AsyncValue<List<Category>> listActivite = ref.watch(getActivite);
 
     return Scaffold(
@@ -185,6 +174,9 @@ class ReceptionPage extends ConsumerWidget {
               ),
               TextButton(
                 onPressed: () {
+                  ref
+                      .watch(typeListReceptionProviderState.notifier)
+                      .update((state) => TypeListReception.EVENEMENT);
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => MoreEvent()));
                 },
@@ -227,12 +219,14 @@ class ReceptionPage extends ConsumerWidget {
                                   child: GestureDetector(
                                     onTap: () {
                                       ref
-                                          .watch(typeInfoStateProvider.notifier)
-                                          .update((state) => TypeInfo.LIEU);
+                                          .watch(typeListReceptionProviderState
+                                              .notifier)
+                                          .update((state) =>
+                                              TypeListReception.ACTIVITE);
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const MoreInfoWidget(),
+                                              const MoreEvent(),
                                         ),
                                       );
                                     },

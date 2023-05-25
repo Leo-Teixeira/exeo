@@ -26,7 +26,7 @@ final listModePorvider = Provider<ListSearch>((ref) {
 //! en attente de la route
 final getAllEvents = FutureProvider(
   (ref) async {
-    final List<Event> infoEventList = [];
+    final List<Events> infoEventList = [];
     final apiUrl = Uri.parse("${urlApi}event/limit");
     final response = await http.get(apiUrl, headers: {
       'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ final getAllEvents = FutureProvider(
       var res = json["data"];
       if (res != null) {
         for (int i = 0; i < res.length; i++) {
-          infoEventList.add(Event.fromMap(res[i]));
+          infoEventList.add(Events.fromMap(res[i]));
         }
         return infoEventList;
       } else {

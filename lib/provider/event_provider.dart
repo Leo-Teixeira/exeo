@@ -132,8 +132,8 @@ final deleteEventFavProvider =
 });
 
 final getEventByTitleProvider =
-    FutureProvider.family<List<Event>, String>((ref, value) async {
-  final List<Event> infoEventList = [];
+    FutureProvider.family<List<Events>, String>((ref, value) async {
+  final List<Events> infoEventList = [];
   final apiUrl = Uri.parse("${urlApi}event/byTitle/$value");
   final response = await http.get(apiUrl, headers: {
     'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ final getEventByTitleProvider =
     var res = json["data"];
     if (res != null) {
       for (int i = 0; i < res.length; i++) {
-        infoEventList.add(Event.fromMap(res[i]));
+        infoEventList.add(Events.fromMap(res[i]));
       }
       return infoEventList;
     } else {
@@ -159,21 +159,29 @@ final getEventByTitleProvider =
 });
 
 final getEventCategoryProvider =
-    FutureProvider.family<bool, String>((ref, value) async {
+    FutureProvider.family<List<Events>, String>((ref, value) async {
+  final List<Events> infoEventsList = [];
   final apiUrl = Uri.parse("${urlApi}event/category/$value");
   final response = await http.get(apiUrl, headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
+  final json = jsonDecode(response.body);
+  if (json['status'] == 201) {
+    return [];
+  }
   if (response.statusCode == 200) {
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    print(json);
-    var res = json['data'];
-
-    // final User infoContactSociete = User.fromMap(res);
-    return true;
+    var res = json["data"];
+    if (res != null) {
+      for (int i = 0; i < res.length; i++) {
+        infoEventsList.add(Events.fromMap(res[i]));
+      }
+      return infoEventsList;
+    } else {
+      return [];
+    }
   } else {
-    return false;
+    throw Exception('failed to login');
   }
 });
 
@@ -195,3 +203,20 @@ class SearchContactNotifier extends StateNotifier<String> {
     state = searchEvent.toLowerCase();
   }
 }
+
+enum TypeListReception { EVENEMENT, ACTIVITE }
+
+final typeListReceptionProviderState =
+    StateProvider<TypeListReception>((ref) => TypeListReception.EVENEMENT);
+
+final typeListReceptionProvider = Provider<TypeListReception>((ref) {
+  final sortType = ref.watch(typeListReceptionProviderState);
+
+  switch (sortType) {
+    case TypeListReception.EVENEMENT:
+      return TypeListReception.EVENEMENT;
+
+    case TypeListReception.ACTIVITE:
+      return TypeListReception.ACTIVITE;
+  }
+});

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// ! pouvoir également rechercher un utilisateur depuis cette interface
 
 class SearchPageWidget extends ConsumerStatefulWidget {
   const SearchPageWidget({super.key});
@@ -21,7 +22,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    List<Event> listSearchEvent = [];
+    List<Events> listSearchEvent = [];
     ListSearch mode = ref.watch(listModePorvider);
     return Scaffold(
       backgroundColor: coulBlack,
@@ -154,7 +155,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
 }
 
 Widget infoEvent(WidgetRef ref, ListSearch mode) {
-  AsyncValue<List<Event>> listEvents = ref.watch(getEvenementsLimit(30));
+  AsyncValue<List<Events>> listEvents = ref.watch(getEvenementsLimit(30));
   return listEvents.when(data: (events) {
     return Expanded(
         child: ListView.separated(
@@ -165,7 +166,7 @@ Widget infoEvent(WidgetRef ref, ListSearch mode) {
                   onTap: () {
                     ref
                         .watch(typeInfoStateProvider.notifier)
-                        .update((state) => TypeInfo.EVENEMENT);
+                        .update((state) => TypeInfo.LIEU);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MoreInfoWidget(
@@ -236,7 +237,7 @@ Widget infoEvent(WidgetRef ref, ListSearch mode) {
 }
 
 Widget infoEventSearch(WidgetRef ref, ListSearch mode) {
-  AsyncValue<List<Event>> listEventsSearch = ref.watch(
+  AsyncValue<List<Events>> listEventsSearch = ref.watch(
       getEventByTitleProvider(ref.watch(searchEventProvider.notifier).state));
   return listEventsSearch.when(data: (listEvents) {
     return Expanded(
@@ -248,7 +249,7 @@ Widget infoEventSearch(WidgetRef ref, ListSearch mode) {
                   onTap: () {
                     ref
                         .watch(typeInfoStateProvider.notifier)
-                        .update((state) => TypeInfo.EVENEMENT);
+                        .update((state) => TypeInfo.LIEU);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MoreInfoWidget(

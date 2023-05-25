@@ -11,7 +11,7 @@ import 'package:exeo/screens/more_user.dart';
 import 'package:exeo/services/constant.dart';
 
 class MoreInfoWidget extends ConsumerWidget {
-  final Event? info_event;
+  final Events? info_event;
   const MoreInfoWidget({Key? key, this.info_event}) : super(key: key);
 
   @override
@@ -66,7 +66,7 @@ Widget titlePage(BuildContext context) {
   );
 }
 
-Widget bodyPage(WidgetRef ref, BuildContext context, [Event? infoEvent]) {
+Widget bodyPage(WidgetRef ref, BuildContext context, [Events? infoEvent]) {
   TypeInfo type = ref.watch(typeInfoStateProvider);
   return Container(
     margin: const EdgeInsets.only(left: 15, right: 15),
