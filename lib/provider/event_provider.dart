@@ -147,7 +147,15 @@ final getEventByTitleProvider =
     var res = json["data"];
     if (res != null) {
       for (int i = 0; i < res.length; i++) {
-        infoEventList.add(AllEvents.fromMap(res[i]));
+        ref.watch(getEventPicture(res[i]['id'])).whenData((value) {
+          print(value);
+          if (value.isNotEmpty) {
+            infoEventList.add(
+                AllEvents.fromMap(res[i], value[0].content, value[1].content));
+          } else {
+            infoEventList.add(AllEvents.fromMap(res[i], "", ""));
+          }
+        });
       }
       return infoEventList;
     } else {
@@ -174,9 +182,45 @@ final getEventCategoryProvider =
     var res = json["data"];
     if (res != null) {
       for (int i = 0; i < res.length; i++) {
-        infoEventsList.add(Events.fromMap(res[i]));
+        ref.watch(getEventPicture(res[i]['id'])).whenData((value) {
+          if (value.isNotEmpty) {
+            infoEventsList.add(
+                Events.fromMap(res[i], value[0].content, value[1].content));
+          } else {
+            infoEventsList.add(Events.fromMap(res[i], "", ""));
+          }
+        });
       }
       return infoEventsList;
+    } else {
+      return [];
+    }
+  } else {
+    throw Exception('failed to login');
+  }
+});
+
+final getEventPicture =
+    FutureProvider.family<List<Picture>, int>((ref, id) async {
+  print(id);
+  final List<Picture> pictureEvent = [];
+  final apiUrl = Uri.parse("${urlApi}event/image/$id");
+  final response = await http.get(apiUrl, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+  final json = jsonDecode(response.body);
+  if (json['status'] == 201) {
+    return [];
+  }
+  if (response.statusCode == 200) {
+    var res = json["data"];
+    print(res);
+    if (res != null) {
+      for (int i = 0; i < res.length; i++) {
+        pictureEvent.add(Picture.fromMap(res[i]));
+      }
+      return pictureEvent;
     } else {
       return [];
     }

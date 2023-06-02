@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:exeo/models/category_model.dart';
 import 'package:exeo/models/event_model.dart';
+import 'package:exeo/provider/event_provider.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -56,8 +57,17 @@ final getEvenementsLimit =
     var res = json["data"];
     if (res != null) {
       for (int i = 0; i < res.length; i++) {
-        infoEventList.add(Events.fromMap(res[i]));
+        ref.watch(getEventPicture(res[i]['id'])).whenData((value) {
+          print(value);
+          if (value.isNotEmpty) {
+            infoEventList.add(
+                Events.fromMap(res[i], value[0].content, value[1].content));
+          } else {
+            infoEventList.add(Events.fromMap(res[i], "", ""));
+          }
+        });
       }
+      print(infoEventList[0].logo);
       return infoEventList;
     } else {
       return [];
@@ -82,7 +92,15 @@ final getAllEvent = FutureProvider<List<AllEvents>>((ref) async {
     var res = json["data"];
     if (res != null) {
       for (int i = 0; i < res.length; i++) {
-        infoEventList.add(AllEvents.fromMap(res[i]));
+        ref.watch(getEventPicture(res[i]['id'])).whenData((value) {
+          print(value);
+          if (value.isNotEmpty) {
+            infoEventList.add(
+                AllEvents.fromMap(res[i], value[0].content, value[1].content));
+          } else {
+            infoEventList.add(AllEvents.fromMap(res[i], "", ""));
+          }
+        });
       }
       return infoEventList;
     } else {
@@ -110,7 +128,6 @@ final getActivite = FutureProvider<List<Category>>((ref) async {
       for (int i = 0; i < res.length; i++) {
         infoCategoryList.add(Category.fromMap(res[i]));
       }
-      print(infoCategoryList);
       return infoCategoryList;
     } else {
       return [];

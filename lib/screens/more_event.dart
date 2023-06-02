@@ -63,8 +63,10 @@ Widget getListEvents(BuildContext context, WidgetRef ref) {
                           style: BorderStyle.solid),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(8.0)),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/pictures/bar_chat.png"),
+                      image: DecorationImage(
+                          image: NetworkImage(events[index].picture != ""
+                              ? "http://mdp01.mdstestangers.fr${events[index].picture}"
+                              : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/MacOS_prohibitory_symbol.svg/1200px-MacOS_prohibitory_symbol.svg.png"),
                           fit: BoxFit.cover),
                     ),
                     child: ListTile(

@@ -53,10 +53,11 @@ class MoreActivities extends ConsumerWidget {
                                     style: BorderStyle.solid),
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(8.0)),
-                                image: const DecorationImage(
-                                    image: AssetImage(
-                                        "assets/pictures/bar_chat.png"),
-                                    fit: BoxFit.cover),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "http://mdp01.mdstestangers.fr${category[index].content!}"),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                               child: ListTile(
                                 contentPadding:

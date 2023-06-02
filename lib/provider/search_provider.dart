@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:exeo/provider/event_provider.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -40,7 +41,14 @@ final getAllEvents = FutureProvider(
       var res = json["data"];
       if (res != null) {
         for (int i = 0; i < res.length; i++) {
-          infoEventList.add(Events.fromMap(res[i]));
+          ref.watch(getEventPicture(res[i]['id'])).whenData((value) {
+            if (value.isNotEmpty) {
+              infoEventList.add(
+                  Events.fromMap(res[i], value[0].content, value[1].content));
+            } else {
+              infoEventList.add(Events.fromMap(res[i], "", ""));
+            }
+          });
         }
         return infoEventList;
       } else {

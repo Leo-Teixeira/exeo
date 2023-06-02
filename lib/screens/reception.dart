@@ -62,9 +62,10 @@ class ReceptionPage extends ConsumerWidget {
                             height: 130,
                             margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                image:
-                                    AssetImage("assets/pictures/bar_chat.png"),
+                              image: DecorationImage(
+                                image: NetworkImage(events[i].picture != ""
+                                    ? "http://mdp01.mdstestangers.fr${events[i].picture}"
+                                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/MacOS_prohibitory_symbol.svg/1200px-MacOS_prohibitory_symbol.svg.png"),
                                 fit: BoxFit.cover,
                               ),
                               border: Border.all(
@@ -94,8 +95,10 @@ class ReceptionPage extends ConsumerWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Image.asset(
-                                      "assets/pictures/test.jpeg",
+                                    Image.network(
+                                      events[i].logo == ""
+                                          ? "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/MacOS_prohibitory_symbol.svg/1200px-MacOS_prohibitory_symbol.svg.png"
+                                          : "http://mdp01.mdstestangers.fr${events[i].logo}",
                                       width: 40,
                                       height: 40,
                                     ),
@@ -211,7 +214,6 @@ class ReceptionPage extends ConsumerWidget {
                           physics: NeverScrollableScrollPhysics(),
                           crossAxisCount: 2,
                           children: List.generate(6, (index) {
-                            print(activites[index].content);
                             return GestureDetector(
                               onTap: () {
                                 ref
