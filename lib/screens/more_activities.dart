@@ -41,7 +41,9 @@ class MoreActivities extends ConsumerWidget {
                                       (state) => TypeListReception.ACTIVITE);
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => MoreEvent(),
+                                  builder: (context) => MoreEvent(
+                                    category: category[index].name,
+                                  ),
                                 ),
                               );
                             },

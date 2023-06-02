@@ -1,4 +1,5 @@
 import 'package:exeo/provider/settings_provider.dart';
+import 'package:exeo/screens/cgu.dart';
 import 'package:exeo/screens/login.dart';
 import 'package:exeo/screens/support.dart';
 import 'package:exeo/services/constant.dart';
@@ -63,7 +64,7 @@ class SettingWidget extends ConsumerWidget {
             ),
             darkMode(ref, theme),
             contactSupport(context),
-            cgu(),
+            cgu(context),
             btnDeconnect(context),
             const SizedBox(
               height: 10,
@@ -144,7 +145,7 @@ Widget contactSupport(BuildContext context) {
   );
 }
 
-Widget cgu() {
+Widget cgu(BuildContext context) {
   return ListTile(
     leading: const Icon(
       Icons.info_outline,
@@ -155,9 +156,15 @@ Widget cgu() {
       style: TextStyle(
           fontFamily: fontHindMaduraiLight, fontSize: 16, color: coulWhite),
     ),
-    trailing: Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 12, 0),
-      child: const Icon(
+    trailing: IconButton(
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CGU(),
+          ),
+        );
+      },
+      icon: const Icon(
         Icons.arrow_forward_ios,
         color: coulWhite,
       ),

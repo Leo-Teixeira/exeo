@@ -223,7 +223,7 @@ class ReceptionPage extends ConsumerWidget {
                                         (state) => TypeListReception.ACTIVITE);
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => const MoreEvent(),
+                                    builder: (context) => MoreEvent(category: activites[index].name,),
                                   ),
                                 );
                               },

@@ -94,7 +94,11 @@ class _BodyPageState extends ConsumerState<BodyPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset("assets/pictures/bar_chat.png"),
+          Image.network(infoEvent == null && infoAllEvent!.picture != ""
+              ? infoAllEvent!.picture
+              : infoEvent!.picture != "" && infoAllEvent == null
+                  ? infoEvent!.picture
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/MacOS_prohibitory_symbol.svg/1200px-MacOS_prohibitory_symbol.svg.png"),
           const SizedBox(
             height: 24,
           ),

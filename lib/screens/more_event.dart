@@ -8,7 +8,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MoreEvent extends ConsumerWidget {
-  const MoreEvent({super.key});
+  final String? category;
+  const MoreEvent({super.key, this.category});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,7 +28,7 @@ class MoreEvent extends ConsumerWidget {
           titlePage(context),
           type == TypeListReception.EVENEMENT
               ? getListEvents(context, ref)
-              : getListActivity(context, ref)
+              : getListActivity(context, ref, category!)
         ]),
       ),
     );
@@ -118,9 +119,9 @@ Widget getListEvents(BuildContext context, WidgetRef ref) {
   });
 }
 
-Widget getListActivity(BuildContext context, WidgetRef ref) {
+Widget getListActivity(BuildContext context, WidgetRef ref, String category) {
   AsyncValue<List<Events>> listActivity =
-      ref.watch(getEventCategoryProvider("jeux"));
+      ref.watch(getEventCategoryProvider(category.toLowerCase()));
   return listActivity.when(data: (activity) {
     return Expanded(
         child: ListView.separated(
@@ -148,8 +149,10 @@ Widget getListActivity(BuildContext context, WidgetRef ref) {
                           style: BorderStyle.solid),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(8.0)),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/pictures/bar_chat.png"),
+                      image: DecorationImage(
+                          image: NetworkImage(activity[index].picture != ""
+                              ? "http://mdp01.mdstestangers.fr${activity[index].picture}"
+                              : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/MacOS_prohibitory_symbol.svg/1200px-MacOS_prohibitory_symbol.svg.png"),
                           fit: BoxFit.cover),
                     ),
                     child: ListTile(
