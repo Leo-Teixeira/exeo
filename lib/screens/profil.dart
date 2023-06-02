@@ -105,12 +105,12 @@ Widget titlePage(WidgetRef ref, BuildContext context) {
 }
 
 Widget tabBarEventSwipe() {
-  return TabBar(
+  return const TabBar(
     tabs: [
       Tab(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(
               Icons.bookmark_add,
               color: coulGreyGrey,
@@ -132,7 +132,7 @@ Widget tabBarEventSwipe() {
       Tab(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(
               Entypo.switch_icon,
               color: coulGreyGrey,

@@ -67,6 +67,32 @@ final getEvenementsLimit =
   }
 });
 
+final getAllEvent = FutureProvider<List<AllEvents>>((ref) async {
+  final List<AllEvents> infoEventList = [];
+  final apiUrl = Uri.parse("${urlApi}event");
+  final response = await http.get(apiUrl, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+  final json = jsonDecode(response.body);
+  if (json['status'] == 201) {
+    return [];
+  }
+  if (response.statusCode == 200) {
+    var res = json["data"];
+    if (res != null) {
+      for (int i = 0; i < res.length; i++) {
+        infoEventList.add(AllEvents.fromMap(res[i]));
+      }
+      return infoEventList;
+    } else {
+      return [];
+    }
+  } else {
+    throw Exception('failed to login');
+  }
+});
+
 final getActivite = FutureProvider<List<Category>>((ref) async {
   final List<Category> infoCategoryList = [];
   final apiUrl = Uri.parse("${urlApi}category");

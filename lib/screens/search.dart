@@ -155,7 +155,7 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
 }
 
 Widget infoEvent(WidgetRef ref, ListSearch mode) {
-  AsyncValue<List<Events>> listEvents = ref.watch(getEvenementsLimit(30));
+  AsyncValue<List<AllEvents>> listEvents = ref.watch(getAllEvent);
   return listEvents.when(data: (events) {
     return Expanded(
         child: ListView.separated(
@@ -166,11 +166,11 @@ Widget infoEvent(WidgetRef ref, ListSearch mode) {
                   onTap: () {
                     ref
                         .watch(typeInfoStateProvider.notifier)
-                        .update((state) => TypeInfo.LIEU);
+                        .update((state) => TypeInfo.EVENEMENT);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MoreInfoWidget(
-                          info_event: events[index],
+                          info_event_all: events[index],
                         ),
                       ),
                     );
@@ -228,7 +228,11 @@ Widget infoEvent(WidgetRef ref, ListSearch mode) {
             }),
             itemCount: events.length));
   }, error: (err, stack) {
-    return Center(child: Text(stack.toString()));
+    return Center(
+        child: Text(
+      stack.toString(),
+      style: const TextStyle(color: coulWhite),
+    ));
   }, loading: () {
     return const Center(
       child: CircularProgressIndicator(),
@@ -237,7 +241,7 @@ Widget infoEvent(WidgetRef ref, ListSearch mode) {
 }
 
 Widget infoEventSearch(WidgetRef ref, ListSearch mode) {
-  AsyncValue<List<Events>> listEventsSearch = ref.watch(
+  AsyncValue<List<AllEvents>> listEventsSearch = ref.watch(
       getEventByTitleProvider(ref.watch(searchEventProvider.notifier).state));
   return listEventsSearch.when(data: (listEvents) {
     return Expanded(
@@ -249,11 +253,11 @@ Widget infoEventSearch(WidgetRef ref, ListSearch mode) {
                   onTap: () {
                     ref
                         .watch(typeInfoStateProvider.notifier)
-                        .update((state) => TypeInfo.LIEU);
+                        .update((state) => TypeInfo.EVENEMENT);
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MoreInfoWidget(
-                          info_event: listEvents[index],
+                          info_event_all: listEvents[index],
                         ),
                       ),
                     );
@@ -311,7 +315,11 @@ Widget infoEventSearch(WidgetRef ref, ListSearch mode) {
             }),
             itemCount: listEvents.length));
   }, error: (err, stack) {
-    return Center(child: Text(stack.toString()));
+    return Center(
+        child: Text(
+      stack.toString(),
+      style: const TextStyle(color: coulWhite),
+    ));
   }, loading: () {
     return const Center(
       child: CircularProgressIndicator(),
