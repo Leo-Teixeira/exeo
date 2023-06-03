@@ -1,24 +1,20 @@
-import 'package:exeo/services/constant.dart';
-import 'package:exeo/services/test.dart';
 import 'package:exeo/screens/cardSwipe.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
+import 'package:exeo/services/constant.dart';
+import 'package:exeo/services/test.dart';
 
-class SwipeWidget extends ConsumerStatefulWidget {
-  const SwipeWidget({
-    Key? key,
-  }) : super(key: key);
+class SwipeWidget extends StatefulWidget {
+  const SwipeWidget({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<SwipeWidget> createState() => SwipeWidgetState();
+  _SwipeWidgetState createState() => _SwipeWidgetState();
 }
 
-class SwipeWidgetState extends ConsumerState<SwipeWidget> {
-  final CardSwiperController controller = CardSwiperController();
+class _SwipeWidgetState extends State<SwipeWidget> {
+  final AppinioSwiperController controller = AppinioSwiperController();
 
-  final cards =
+  final List<Widget> cards =
       candidates.map((candidate) => SwipeCardWidget(candidate)).toList();
 
   @override
@@ -29,23 +25,32 @@ class SwipeWidgetState extends ConsumerState<SwipeWidget> {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("./assets/pictures/real_background.png"),
-              fit: BoxFit.cover),
+            image: AssetImage("./assets/pictures/real_background.png"),
+            fit: BoxFit.cover,
+          ),
         ),
         child: SafeArea(
           child: Column(
             children: [
               Flexible(
-                child: CardSwiper(
-                  isLoop: true,
+                child: AppinioSwiper(
                   controller: controller,
                   cardsCount: cards.length,
-                  numberOfCardsDisplayed: 3,
-                  onSwipe: onSwipe,
-                  onUndo: onUndo,
-                  padding: const EdgeInsets.all(24.0),
-                  cardBuilder: (context, index) => cards[index],
-                  isVerticalSwipingEnabled: false,
+                  cardsBuilder: (context, index) => cards[index],
+                  onSwipe: (int index, AppinioSwiperDirection position) {
+                    debugPrint(
+                      'The card at index $index was swiped to $position',
+                    );
+                  },
+                  swipeOptions: AppinioSwipeOptions.horizontal,
+                  // onRewind: (int index, SwiperPosition position) {
+                  //   debugPrint(
+                  //     'The card at index $index was rewound from $position',
+                  //   );
+                  // },
+                  // swipeConfiguration: SwipeConfiguration(
+                  //   verticalSwipeBehavior: SwipeBehavior.forbid,
+                  // ),
                 ),
               ),
             ],
@@ -53,27 +58,5 @@ class SwipeWidgetState extends ConsumerState<SwipeWidget> {
         ),
       ),
     );
-  }
-
-  bool onSwipe(
-    int previousIndex,
-    int? currentIndex,
-    CardSwiperDirection direction,
-  ) {
-    debugPrint(
-      'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
-    );
-    return true;
-  }
-
-  bool onUndo(
-    int? previousIndex,
-    int currentIndex,
-    CardSwiperDirection direction,
-  ) {
-    debugPrint(
-      'The card $currentIndex was undod from the ${direction.name}',
-    );
-    return true;
   }
 }

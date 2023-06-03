@@ -16,14 +16,8 @@ class SwipeCardWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    MoreInfoSwipe voirPlus = ref.watch(moreInfoSwipeProviderState);
     String desc =
         "Lorem ipsum dolor sit amet consectetur. Pretium augue at vel mattis rhoncus eros ultricies. Aliquet aliquam ut gravida sociis porttitor suscipit viverra morbi ultrices. Mauris vitae id lacus velit integer placerat quis gravida euismod. At tempus vel urna vitae congue a nisl. Amet maecenas vel porttitor eros amet. Quis est a sit lorem lectus. Euismod et lacus facilisis turpis proin. Enim tristique nunc enim arcu purus risus augue. Tellus diam lorem eget ut pharetra eu.Quisque mi ipsum massa natoque sit dolor. Facilisi adipiscing morbi id amet mattis sed at magnis. Varius arcu integer molestie suspendisse nibh diam. Faucibus iaculis ut netus dapibus nisi nunc. Justo at eros nisl aliquam at sapien vitae. Tincidunt proin aliquet urna rutrum odio diam est cursus. Quis viverra proin mi gravida. Eget faucibus pellentesque non eget pharetra lorem nunc. Vitae scelerisque at vitae eleifend nullam tempus sapien. Faucibus semper ipsum velit ullamcorper commodo tristique. Urna senectus arcu neque vitae et non.";
-    if (desc.length > 100) {
-      ref
-          .watch(moreInfoSwipeProviderState.notifier)
-          .update((state) => MoreInfoSwipe.VOIRPLUS);
-    }
     return GestureDetector(
       onTap: () {
         ref
@@ -105,11 +99,10 @@ class SwipeCardWidget extends ConsumerWidget {
                       ],
                     ),
                   const SizedBox(height: 10),
-                  //! faire un voir plus pour cette partie car description trop longue
                   Column(
                     children: [
                       Text(
-                        voirPlus == MoreInfoSwipe.ALLTEXT
+                        desc.length < 100
                             ? desc
                             : "${desc.substring(0, 100)}...",
                         style: const TextStyle(
@@ -117,7 +110,7 @@ class SwipeCardWidget extends ConsumerWidget {
                             fontFamily: fontHindMaduraiRegular,
                             fontSize: 16),
                       ),
-                      voirPlus == MoreInfoSwipe.VOIRPLUS
+                      desc.length > 100
                           ? TextButton(
                               onPressed: () {
                                 ref
