@@ -22,6 +22,23 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // Initial Selected Value
+    String dropdownvalueprice = 'Tous';
+    String dropdownvalue = 'Tous';
+
+    // List of items in our dropdown menu
+    var itemsPrice = [
+      'Tous',
+      'Gratuit',
+      'Payant',
+    ];
+
+    var items = [
+      'Tous',
+      'Interieur',
+      'Exterieur',
+    ];
+
     List<Events> listSearchEvent = [];
     ListSearch mode = ref.watch(listModePorvider);
     return Scaffold(
@@ -124,6 +141,44 @@ class SearchPage extends ConsumerState<SearchPageWidget> {
                   ),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                DropdownButton(
+                  value: dropdownvalueprice,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: itemsPrice.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalueprice = newValue!;
+                    });
+                  },// Couleur du texte de la DropdownButton
+                ),
+                DropdownButton(
+                  value: dropdownvalue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalue = newValue!;
+                    });
+                  },
+                ),
+              ],
             ),
             const SizedBox(
               height: 35,
