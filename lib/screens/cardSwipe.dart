@@ -1,3 +1,4 @@
+import 'package:exeo/models/event_model.dart';
 import 'package:exeo/provider/reception_provider.dart';
 import 'package:exeo/screens/more_info.dart';
 import 'package:exeo/services/constant.dart';
@@ -6,17 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SwipeCardWidget extends ConsumerWidget {
-  final ExampleCandidateModel candidate;
+  final Events event;
 
   const SwipeCardWidget(
-    this.candidate, {
+    this.event, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String desc =
-        "Lorem ipsum dolor sit amet consectetur. Pretium augue at vel mattis rhoncus eros ultricies. Aliquet aliquam ut gravida sociis porttitor suscipit viverra morbi ultrices. Mauris vitae id lacus velit integer placerat quis gravida euismod. At tempus vel urna vitae congue a nisl. Amet maecenas vel porttitor eros amet. Quis est a sit lorem lectus. Euismod et lacus facilisis turpis proin. Enim tristique nunc enim arcu purus risus augue. Tellus diam lorem eget ut pharetra eu.Quisque mi ipsum massa natoque sit dolor. Facilisi adipiscing morbi id amet mattis sed at magnis. Varius arcu integer molestie suspendisse nibh diam. Faucibus iaculis ut netus dapibus nisi nunc. Justo at eros nisl aliquam at sapien vitae. Tincidunt proin aliquet urna rutrum odio diam est cursus. Quis viverra proin mi gravida. Eget faucibus pellentesque non eget pharetra lorem nunc. Vitae scelerisque at vitae eleifend nullam tempus sapien. Faucibus semper ipsum velit ullamcorper commodo tristique. Urna senectus arcu neque vitae et non.";
+    String desc = event.description;
     return GestureDetector(
       onTap: () {
         ref
@@ -24,7 +24,7 @@ class SwipeCardWidget extends ConsumerWidget {
             .update((state) => TypeInfo.LIEU);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const MoreInfoWidget(),
+            builder: (context) => MoreInfoWidget(info_event: event),
           ),
         );
       },
@@ -48,13 +48,9 @@ class SwipeCardWidget extends ConsumerWidget {
           children: [
             Flexible(
               child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: candidate.color,
-                  ),
-                ),
+                child: Image.network(event.picture != ""
+                    ? "http://mdp01.mdstestangers.fr${event.picture}"
+                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/MacOS_prohibitory_symbol.svg/1200px-MacOS_prohibitory_symbol.svg.png"),
               ),
             ),
             Padding(
@@ -63,7 +59,7 @@ class SwipeCardWidget extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    candidate.name,
+                    event.title,
                     style: const TextStyle(
                       color: coulWhite,
                       fontFamily: fontRubikMedium,
@@ -88,7 +84,7 @@ class SwipeCardWidget extends ConsumerWidget {
                               ),
                             ),
                             child: Text(
-                              candidate.job,
+                              event.Category,
                               style: const TextStyle(
                                   fontFamily: fontHindMaduraiMedium,
                                   fontSize: 16,

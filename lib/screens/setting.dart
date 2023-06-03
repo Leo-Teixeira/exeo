@@ -69,7 +69,7 @@ class SettingWidget extends ConsumerWidget {
             const SizedBox(
               height: 10,
             ),
-            btnSuppCompte(),
+            btnSuppCompte(context),
           ],
         ),
       ),
@@ -193,9 +193,9 @@ Widget btnDeconnect(BuildContext context) {
           const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text(
             "Déconnexion",
             style: TextStyle(
@@ -217,11 +217,15 @@ Widget btnDeconnect(BuildContext context) {
   );
 }
 
-Widget btnSuppCompte() {
+Widget btnSuppCompte(BuildContext context) {
   return Container(
     margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => LoginPage()),
+            (route) => false);
+      },
       style: ButtonStyle(
         shape:
             MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(
@@ -238,9 +242,9 @@ Widget btnSuppCompte() {
           const EdgeInsets.fromLTRB(2.25, 11.25, 2.25, 11.25),
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text(
             "Supprimer mon compte",
             style: TextStyle(
