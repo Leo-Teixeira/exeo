@@ -1,5 +1,4 @@
 import 'package:exeo/provider/reception_provider.dart';
-import 'package:exeo/provider/swipe_provider.dart';
 import 'package:exeo/screens/more_info.dart';
 import 'package:exeo/services/constant.dart';
 import 'package:exeo/services/test.dart';
